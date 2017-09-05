@@ -15,6 +15,7 @@ class Converter {
     constructor(options) {
         this.files = options.files;
         this.output = options.output;
+        this.invert = options.invert || false;
         this.song = 0;
         this.start = Date.now();
 
@@ -89,7 +90,9 @@ class Converter {
     convertedToPng(pageList) {
         this.deletePdf();
 
-        pageList.forEach(this.page.bind(this));
+        if(this.invert) {
+            pageList.forEach(this.page.bind(this));
+        }
 
         this.next();
     }

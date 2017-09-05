@@ -7,7 +7,8 @@ glob('input/opwekking/*.ppt', {}, function(er, files) {
     if(files) {
         new Converter({
             files:  files,
-            output: 'output/opwekking/'
+            output: 'output/opwekking/',
+            invert: true
         });
     }
 });
