@@ -36,7 +36,11 @@ files: Array with the files.
 
 output: Output folder.
 
-invert: Invert the colors.
+invert: Invert the colors, default is `false`;
+
+deletePdfFile: Delete the pdf file after converting, default is `true`.
+
+outputType: Output type, default is `png`.
 
 
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg

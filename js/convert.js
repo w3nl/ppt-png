@@ -16,6 +16,8 @@ class Converter {
         this.files = options.files;
         this.output = options.output;
         this.invert = options.invert || false;
+        this.deletePdfFile = options.deletePdfFile || true;
+        this.outputType = options.outputType || 'png';
         this.song = 0;
         this.start = Date.now();
 
@@ -65,7 +67,7 @@ class Converter {
         var file = this.output + song;
         var converter = pdf2image.compileConverter({
             outputFormat: file + '_page_%d',
-            outputType:   'png'
+            outputType:   this.outputType
         });
 
         console.log('converted to pdf');
@@ -99,8 +101,10 @@ class Converter {
      * @param {array} pageList
      */
     convertedToPng(pageList) {
-        console.log('converted to png');
-        this.deletePdf();
+        console.log('converted to ' + this.outputType);
+        if(this.deletePdfFile) {
+            this.deletePdf();
+        }
 
         if(this.invert) {
             pageList.forEach(this.page.bind(this));
