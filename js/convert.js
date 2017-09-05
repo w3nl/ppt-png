@@ -84,9 +84,13 @@ class Converter {
         console.log('pdf saved');
 
         // converts all the pages of the given pdf using the default options
-        converter.convertPDF(file + '.pdf').then(
-            this.convertedToPng.bind(this)
-        );
+        converter.convertPDF(file + '.pdf')
+            .then(
+                this.convertedToPng.bind(this)
+            )
+            .catch(
+                this.next.bind(this)
+            );
     }
 
     /**
