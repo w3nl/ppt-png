@@ -50,6 +50,7 @@ class Converter {
      * @param {int} song
      */
     convert(file, song) {
+        console.log('convert');
         unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, song));
     }
 
@@ -67,14 +68,20 @@ class Converter {
             outputType:   'png'
         });
 
+        console.log('converted to pdf');
+
         if (error) {
-            console.log('error 1');
+            console.error('error on converting to pdf');
+
+            this.next();
 
             return;
         }
 
         // result is returned as a Buffer
         fs.writeFile(file + '.pdf', result);
+
+        console.log('pdf saved');
 
         // converts all the pages of the given pdf using the default options
         converter.convertPDF(file + '.pdf').then(
@@ -88,6 +95,7 @@ class Converter {
      * @param {array} pageList
      */
     convertedToPng(pageList) {
+        console.log('converted to png');
         this.deletePdf();
 
         if(this.invert) {
@@ -112,12 +120,14 @@ class Converter {
      * Invert page.
      *
      * @param {string} file
-     * @param {object} err
+     * @param {object} error
      * @param {object} image
      */
-    invertPage(file, err, image) {
-        if (err) {
-            throw err;
+    invertPage(file, error, image) {
+        if (error) {
+            console.error('invering page error', error);
+
+            return;
         }
         image.invert().write(file);
     }
@@ -130,11 +140,13 @@ class Converter {
     deletePdf() {
         var file = this.output + this.song + '.pdf';
 
+        console.log('delete pdf');
+
         fs.exists(file, function(exists) {
             if (exists) {
-                fs.unlink(file, function(err) {
-                    if(err) {
-                        console.log(err);
+                fs.unlink(file, function(error) {
+                    if(error) {
+                        console.error('cannot delete pdf', error);
                     }
                 });
             }
