@@ -12,6 +12,7 @@ The package requires the following software to be installed:
 * unoconv
 * LibreOffice-dev
 * ImageMagick
+* pdfinfo
 
 ## Installation
 
