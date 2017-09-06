@@ -18,7 +18,7 @@ The package requires the following software to be installed:
 
     npm install ppt-png
 
-Debian/Ubunut:
+Debian/Ubuntu:
 
     sudo apt install unoconv libreoffice-dev imagemagick poppler-utils
 
