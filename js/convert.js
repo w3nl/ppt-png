@@ -136,11 +136,13 @@ class Converter {
      * @param {int} song
      */
     convert(file, song) {
+        var numbers = file.match(/\d+/g);
+
         if (this.logLevel >= 2) {
             console.log('convert');
         }
 
-        unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, song));
+        unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, song, numbers));
     }
 
     /**
@@ -150,10 +152,11 @@ class Converter {
      * @param {object} error
      * @param {object} result
      */
-    convertedToPdf(song, error, result) {
-        var file = this.output + song;
+    convertedToPdf(song, numbers, error, result) {
+        var pdfFile = this.output + song;
+        var pngFile = this.output + numbers.join('_');
         var converter = pdf2image.compileConverter({
-            outputFormat: file + '_page_%d',
+            outputFormat: pngFile + '_page_%d',
             outputType:   this.outputType
         });
 
@@ -172,14 +175,14 @@ class Converter {
         }
 
         // result is returned as a Buffer
-        fs.writeFile(file + '.pdf', result);
+        fs.writeFile(pdfFile + '.pdf', result);
 
         if (this.logLevel >= 2) {
             console.log('pdf saved');
         }
 
         // converts all the pages of the given pdf using the default options
-        converter.convertPDF(file + '.pdf')
+        converter.convertPDF(pdfFile + '.pdf')
             .then(
                 this.convertedToPng.bind(this)
             )
