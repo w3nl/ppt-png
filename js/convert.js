@@ -20,6 +20,7 @@ class Converter {
         this.deletePdfFile = options.deletePdfFile || true;
         this.outputType = options.outputType || 'png';
         this.logLevel = options.logLevel || 1;
+        this.callback = options.callback || null;
         this.song = 0;
         this.start = Date.now();
         this.songConvertTime = this.start;
@@ -30,6 +31,11 @@ class Converter {
         this.reject = null;
     }
 
+    /**
+     * With this function, you can use the promise function.
+     *
+     * @return {object}
+     */
     wait() {
         var promise;
 
@@ -37,9 +43,31 @@ class Converter {
 
         promise = new Promise(this.next.bind(this));
 
-        promise.songs = this.songs;
-
         return promise;
+    }
+
+    /**
+     * Add more files.
+     *
+     * @param {array} files
+     *
+     * @return {object}
+     */
+    addFiles(files) {
+        this.files.push(...files);
+
+        return this;
+    }
+
+    /**
+     * Start the script.
+     *
+     * @return {object}
+     */
+    run() {
+        this.next();
+
+        return this;
     }
 
     /**
@@ -73,6 +101,14 @@ class Converter {
             this.ready = true;
             if(this.promise == true) {
                 this.resolve({
+                    songs: this.songs,
+                    files: this.filesDone,
+                    time:  totalTime
+                });
+            }
+
+            if(this.callback) {
+                this.callback({
                     songs: this.songs,
                     files: this.filesDone,
                     time:  totalTime

@@ -26,10 +26,13 @@ Debian/Ubunut:
 
 ```
 new Converter({
-    files:  files,
-    output: 'output/'
-    invert: true
-});
+    files:    files,
+    output:   'output/'
+    invert:   true,
+    callback: function(data) {
+        console.log(data.songs, data.files, data.time);
+    }
+}).run();
 ```
 
 ## Promise based
@@ -59,6 +62,24 @@ deletePdfFile: Delete the pdf file after converting, default is `true`.
 outputType: Output type, default is `png`.
 
 logLevel: Set the log level, default is `1`.
+
+callback: function calls when the script is ready.
+
+The function and promise send an object to the first parameter.
+
+```
+{
+    songs: [],
+    files: [],
+    time: 0
+}
+```
+
+songs: an array with objects (page, index, name, path).
+
+files: array with files send to the script.
+
+time: total time the script was running.
 
 
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg
