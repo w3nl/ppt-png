@@ -34,7 +34,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.1.2';
+        this.version = '0.1.3';
     }
 
     /**
@@ -210,7 +210,7 @@ class Converter {
         });
 
         if (this.logLevel >= 2) {
-            console.log('Converted to pdf: ' + pdfFile);
+            console.log('Converted to pdf');
         }
 
         if (error) {
