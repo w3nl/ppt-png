@@ -1212,6 +1212,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+way2web-helpers@0.1.x:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/way2web-helpers/-/way2web-helpers-0.1.0.tgz#5d5c2ecfc2a5b876faf1204dcf3401816978c905"
+
 which@^1.2.9:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/which/-/which-1.3.0.tgz#ff04bdfc010ee547d780bec38e1ac1c2777d253a"

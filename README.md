@@ -1,9 +1,9 @@
 # ppt-png
-Convert ppt to png.
+Convert ppt to image (png,jpg).
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
 
-If you want convert powerpoint files to png images, you can do it with this script.
+If you want convert powerpoint files to png or jpg images, you can do it with this script.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ new Converter({
     output:   'output/'
     invert:   true,
     callback: function(data) {
-        console.log(data.songs, data.files, data.time);
+        console.log(data.failed, data.success, data.files, data.time);
     }
 }).run();
 ```
@@ -47,7 +47,7 @@ new Converter({
     outputType:    'png',
     logLevel:      2
 }).wait().then(function(data) {
-    console.log(data.songs, data.files, data.time);
+    console.log(data.failed, data.success, data.files, data.time);
 });
 ```
 
@@ -58,29 +58,34 @@ output: Output folder.
 
 invert: Invert the colors, default is `false`;
 
+greyscale: Greyscale the colors, default is `false`;
+
 deletePdfFile: Delete the pdf file after converting, default is `true`.
 
-outputType: Output type, default is `png`.
+outputType: Output type, default is `png`, but `jpg` is also possible.
 
 logLevel: Set the log level, default is `1`.
 
-callback: function calls when the script is ready.
+callback: Function calls when the script is ready.
 
 The function and promise send an object to the first parameter.
 
 ```
 {
-    songs: [],
+    failed: [],
+    success: [],
     files: [],
     time: 0
 }
 ```
 
-songs: an array with objects (page, index, name, path).
+failed: An array with objects for failed converting files (file, failure, error)
 
-files: array with files send to the script.
+success: An array with objects for converted files (page, index, name, path).
 
-time: total time the script was running.
+files: An array with files send to the script.
+
+time: The total time the script was running.
 
 
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg

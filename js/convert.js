@@ -3,8 +3,10 @@ const Jimp = require('jimp');
 const pdf2image = require('pdf2image');
 const unoconv = require('unoconv2');
 
+require('way2web-helpers');
+
 /**
- * PPT to PNG converter.
+ * PPT to Image converter.
  */
 class Converter {
     /**
@@ -17,15 +19,17 @@ class Converter {
         this.filesDone = [];
         this.output = options.output;
         this.invert = options.invert || false;
+        this.greyscale = options.greyscale || false;
         this.deletePdfFile = options.deletePdfFile || true;
         this.outputType = options.outputType || 'png';
         this.logLevel = options.logLevel || 1;
         this.callback = options.callback || null;
         this.fileNameFormat = options.fileNameFormat || '_page_%d',
-        this.song = 0;
+        this.file = 0;
         this.start = Date.now();
-        this.songConvertTime = this.start;
-        this.songs = [];
+        this.fileConvertTime = this.start;
+        this.success = [];
+        this.failed = [];
         this.ready = false;
         this.promise = false;
         this.resolve = null;
@@ -43,7 +47,7 @@ class Converter {
 
         this.promise = true;
 
-        promise = new Promise(this.next.bind(this));
+        promise = new Promise(this.run.bind(this));
 
         return promise;
     }
@@ -64,114 +68,159 @@ class Converter {
     /**
      * Start the script.
      *
+     * @param {object} resolve
+     * @param {object} reject
+     *
      * @return {object}
      */
-    run() {
+    run(resolve, reject) {
+        if (resolve && this.promise == true) {
+            this.resolve = resolve;
+        }
+
+        if (reject && this.promise == true) {
+            this.reject = reject;
+        }
+
         this.next();
 
         return this;
     }
 
     /**
-     * Get the next file.
+     * Called when the pdf to image failed (convertPDF).
      *
-     * @param {object} resolve
-     * @param {object} reject
+     * @param {object} error
      */
-    next(resolve, reject) {
+    fail(error) {
+        if (this.logLevel >= 1) {
+            console.error('Cannot convert: ' + this.currentFile);
+        }
+
+        this.failed.push({
+            file:    this.currentFile,
+            failure: 'convertPDF',
+            error:   error
+        });
+
+        this.next();
+    }
+
+    /**
+     * Run again failed files.
+     *
+     * @return {object}
+     */
+    resetFailed() {
+        if (this.logLevel >= 1) {
+            console.error('Reset files: ' + this.failed.length);
+        }
+
+        this.files = this.failed.multikey('file');
+
+        this.run();
+
+        return this;
+    }
+
+    /**
+     * Get the next file.
+     */
+    next() {
         var totalTime = Date.now() - this.start;
-        var songTime = Date.now() - this.songConvertTime;
+        var fileTime = Date.now() - this.fileConvertTime;
+        var response;
 
-        if(resolve && this.promise == true) {
-            this.resolve = resolve;
-        }
-
-        if(reject && this.promise == true) {
-            this.reject = reject;
-        }
-
-        this.songConvertTime = Date.now();
+        this.fileConvertTime = Date.now();
 
         if (this.files.length < 1) {
-            if (this.song > 0 && this.logLevel >= 1) {
-                console.log('Total time: ' + totalTime + 'ms for ' + this.song + ' songs');
+            if (this.file > 0 && this.logLevel >= 1) {
+                console.log('Total time: ' + totalTime + 'ms for ' + this.file + ' files');
+                if (this.logLevel >= 3) {
+                    console.log('Average: ' + (totalTime / this.file) + 'ms/file');
+                }
             }
 
-            if(this.logLevel >= 3) {
-                console.log(this.songs);
+            if (this.logLevel >= 3) {
+                console.log(this.success);
             }
 
             this.ready = true;
-            if(this.promise == true) {
-                this.resolve({
-                    songs: this.songs,
-                    files: this.filesDone,
-                    time:  totalTime
-                });
+            response = {
+                success: this.success,
+                failed:  this.failed,
+                files:   this.filesDone,
+                time:    totalTime
+            };
+
+            if (this.promise == true) {
+                this.resolve(response);
             }
 
-            if(this.callback) {
-                this.callback({
-                    songs: this.songs,
-                    files: this.filesDone,
-                    time:  totalTime
-                });
+            if (this.callback) {
+                this.callback(response);
             }
 
             return;
         }
 
-        this.song++;
+        this.file++;
         if (this.logLevel >= 1) {
-            console.log('song: ' + this.song + ', time: ' + songTime + ' ms, total time: ' + totalTime + 'ms');
+            console.log('File: ' + this.file + ', time: ' + fileTime + ' ms, total time: ' + totalTime + 'ms');
+            console.log('Average: ' + (totalTime / this.file) + 'ms/file');
         }
 
         this.currentFile = this.files.pop();
         this.filesDone.push(this.currentFile);
 
-        this.convert(this.currentFile, this.song);
+        this.convert(this.currentFile, this.file);
     }
 
     /**
      * Convert function.
      *
      * @param {string} file
-     * @param {int} song
+     * @param {int} index
      */
-    convert(file, song) {
+    convert(file, index) {
         var fileName = file.split('/').pop();
         var numbers = fileName.match(/\d+/g);
 
         if (this.logLevel >= 2) {
-            console.log('convert: ' + file);
+            console.log('Convert: ' + file);
         }
 
-        unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, song, numbers));
+        unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, index, numbers));
     }
 
     /**
-     * Convert PDF to PNG.
+     * Convert PDF to Image.
      *
-     * @param {int} song
+     * @param {int} index
      * @param {array} numbers
      * @param {object} error
      * @param {object} result
      */
-    convertedToPdf(song, numbers, error, result) {
-        var pdfFile = this.output + song;
-        var pngFile = this.output + numbers.join('_');
+    convertedToPdf(index, numbers, error, result) {
+        var pdfFile = this.output + index + '.pdf';
+        var imageFile = this.output + numbers.join('_');
         var converter = pdf2image.compileConverter({
-            outputFormat: pngFile + this.fileNameFormat,
+            outputFormat: imageFile + this.fileNameFormat,
             outputType:   this.outputType
         });
 
         if (this.logLevel >= 2) {
-            console.log('converted to pdf (' + pdfFile + ')');
+            console.log('Converted to pdf: ' + pdfFile);
         }
 
         if (error) {
             if (this.logLevel >= 1) {
-                console.error('error on converting to pdf');
+                console.error('Error on converting to pdf');
+                this.failed.push({
+                    file:    this.currentFile,
+                    failure: 'unoconv',
+                    error:   error
+                });
             }
 
             this.next();
@@ -180,72 +229,86 @@ class Converter {
         }
 
         // result is returned as a Buffer
-        fs.writeFile(pdfFile + '.pdf', result);
+        fs.writeFile(pdfFile, result);
 
         if (this.logLevel >= 2) {
-            console.log('pdf saved (' + pngFile + ')');
+            console.log('Pdf saved: ' + pdfFile);
         }
 
         // converts all the pages of the given pdf using the default options
-        converter.convertPDF(pdfFile + '.pdf')
+        converter.convertPDF(pdfFile)
             .then(
-                this.convertedToPng.bind(this)
+                this.convertedToImage.bind(this)
             )
             .catch(
-                this.run.bind(this)
+                this.fail.bind(this)
             );
     }
 
     /**
-     * Convert to png.
+     * Convert to image.
      *
      * @param {array} pageList
      */
-    convertedToPng(pageList) {
+    convertedToImage(pageList) {
         if (this.logLevel >= 2) {
-            console.log('converted to: ' + this.outputType);
+            console.log('Converted to: ' + this.outputType);
         }
+
+        if (this.invert || this.greyscale) {
+            pageList.forEach(this.page.bind(this));
+        }
+
+        this.success.push(pageList);
 
         if (this.deletePdfFile) {
             this.deletePdf();
         }
 
-        if (this.invert) {
-            pageList.forEach(this.page.bind(this));
-        }
-
-        this.songs.push(pageList);
-
         this.next();
     }
 
     /**
-     * A song page.
+     * A page image.
      *
      * @param {object} element
      */
     page(element) {
         var file = element.path;
 
-        Jimp.read(file, this.invertPage.bind(this, file));
+        Jimp.read(file, this.processPage.bind(this, file));
     }
 
     /**
-     * Invert page.
+     * Process page image.
      *
      * @param {string} file
      * @param {object} error
      * @param {object} image
      */
-    invertPage(file, error, image) {
+    processPage(file, error, image) {
         if (error) {
             if (this.logLevel >= 1) {
-                console.error('invering page error', error);
+                console.error('Inverting page error', error);
+                this.failed.push({
+                    file:    this.currentFile,
+                    failure: 'jimp',
+                    error:   error
+                });
             }
 
             return;
         }
-        image.invert().write(file);
+
+        if(this.greyscale) {
+            image.greyscale();
+        }
+
+        if(this.invert) {
+            image.invert();
+        }
+
+        image.write(file);
     }
 
     /**
@@ -254,17 +317,25 @@ class Converter {
      * @param {string} file
      */
     deletePdf() {
-        var file = this.output + this.song + '.pdf';
+        var file = this.output + this.file + '.pdf';
 
         if (this.logLevel >= 2) {
-            console.log('delete pdf: ' + file);
+            console.log('Delete pdf: ' + file);
         }
 
         fs.exists(file, function(exists) {
             if (exists) {
                 fs.unlink(file, function(error) {
-                    if (error && this.logLevel >= 1) {
-                        console.error('cannot delete pdf', error);
+                    if (error) {
+                        if (this.logLevel >= 1) {
+                            console.error('Cannot delete pdf', error);
+                        }
+
+                        this.failed.push({
+                            file:    this.currentFile,
+                            failure: 'unlink',
+                            error:   error
+                        });
                     }
                 });
             }
