@@ -14,6 +14,7 @@ class Converter {
      */
     constructor(options) {
         this.files = options.files;
+        this.filesDone = [];
         this.output = options.output;
         this.invert = options.invert || false;
         this.deletePdfFile = options.deletePdfFile || true;
@@ -21,19 +22,61 @@ class Converter {
         this.logLevel = options.logLevel || 1;
         this.song = 0;
         this.start = Date.now();
+        this.songConvertTime = this.start;
+        this.songs = [];
+        this.ready = false;
+        this.promise = false;
+        this.resolve = null;
+        this.reject = null;
+    }
 
-        this.next();
+    wait() {
+        var promise;
+
+        this.promise = true;
+
+        promise = new Promise(this.next.bind(this));
+
+        promise.songs = this.songs;
+
+        return promise;
     }
 
     /**
      * Get the next file.
+     *
+     * @param {object} resolve
+     * @param {object} reject
      */
-    next() {
-        var time = Date.now() - this.start;
+    next(resolve, reject) {
+        var totalTime = Date.now() - this.start;
+        var songTime = Date.now() - this.songConvertTime;
+
+        if(resolve && this.promise == true) {
+            this.resolve = resolve;
+        }
+        if(reject && this.promise == true) {
+            this.reject = reject;
+        }
+
+        this.songConvertTime = Date.now();
 
         if (this.files.length < 1) {
             if (this.song > 0 && this.logLevel >= 1) {
-                console.log('Total time: ' + time + 'ms for ' + this.song + ' songs');
+                console.log('Total time: ' + totalTime + 'ms for ' + this.song + ' songs');
+            }
+
+            if(this.logLevel >= 3) {
+                console.log(this.songs);
+            }
+
+            this.ready = true;
+            if(this.promise == true) {
+                this.resolve({
+                    songs: this.songs,
+                    files: this.filesDone,
+                    time:  totalTime
+                });
             }
 
             return;
@@ -41,10 +84,11 @@ class Converter {
 
         this.song++;
         if (this.logLevel >= 1) {
-            console.log('song: ' + this.song + ' time: ' + time + ' ms');
+            console.log('song: ' + this.song + ', time: ' + songTime + ' ms, total time: ' + totalTime + 'ms');
         }
 
         this.currentFile = this.files.pop();
+        this.filesDone.push(this.currentFile);
 
         this.convert(this.currentFile, this.song);
     }
@@ -125,6 +169,8 @@ class Converter {
         if (this.invert) {
             pageList.forEach(this.page.bind(this));
         }
+
+        this.songs.push(pageList);
 
         this.next();
     }

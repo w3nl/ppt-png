@@ -19,7 +19,7 @@ The package requires the following software to be installed:
 
 Debian/Ubunut:
 
-    sudo apt-get install unoconv libreoffice-dev imagemagick
+    sudo apt install unoconv libreoffice-dev imagemagick
 
 
 ## Basic Usage
@@ -31,6 +31,22 @@ new Converter({
     invert: true
 });
 ```
+
+## Promise based
+
+```
+new Converter({
+    files:         files,
+    output:        'output/',
+    invert:        true,
+    deletePdfFile: true,
+    outputType:    'png',
+    logLevel:      2
+}).wait().then(function(data) {
+    console.log(data.songs, data.files, data.time);
+});
+```
+
 
 files: Array with the files.
 

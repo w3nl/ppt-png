@@ -11,7 +11,9 @@ glob('input/test/*.ppt', {}, function(er, files) {
             invert:        true,
             deletePdfFile: true,
             outputType:    'png',
-            logLevel:      3
-        }).next();
+            logLevel:      2
+        }).wait().then(function(data) {
+            console.log(data.songs, data.files, data.time);
+        });
     }
 });
