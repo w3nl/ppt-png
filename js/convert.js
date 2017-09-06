@@ -136,10 +136,11 @@ class Converter {
      * @param {int} song
      */
     convert(file, song) {
-        var numbers = file.match(/\d+/g);
+        var fileName = file.split('/').pop();
+        var numbers = fileName.match(/\d+/g);
 
         if (this.logLevel >= 2) {
-            console.log('convert');
+            console.log('convert: ' + file);
         }
 
         unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, song, numbers));
@@ -149,6 +150,7 @@ class Converter {
      * Convert PDF to PNG.
      *
      * @param {int} song
+     * @param {array} numbers
      * @param {object} error
      * @param {object} result
      */
@@ -161,7 +163,7 @@ class Converter {
         });
 
         if (this.logLevel >= 2) {
-            console.log('converted to pdf');
+            console.log('converted to pdf (' + pdfFile + ')');
         }
 
         if (error) {
@@ -178,7 +180,7 @@ class Converter {
         fs.writeFile(pdfFile + '.pdf', result);
 
         if (this.logLevel >= 2) {
-            console.log('pdf saved');
+            console.log('pdf saved (' + pngFile + ')');
         }
 
         // converts all the pages of the given pdf using the default options
@@ -198,7 +200,7 @@ class Converter {
      */
     convertedToPng(pageList) {
         if (this.logLevel >= 2) {
-            console.log('converted to ' + this.outputType);
+            console.log('converted to: ' + this.outputType);
         }
 
         if (this.deletePdfFile) {
@@ -252,7 +254,7 @@ class Converter {
         var file = this.output + this.song + '.pdf';
 
         if (this.logLevel >= 2) {
-            console.log('delete pdf');
+            console.log('delete pdf: ' + file);
         }
 
         fs.exists(file, function(exists) {

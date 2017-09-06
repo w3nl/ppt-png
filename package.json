@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Convert ppt to png",
     "files": [
         "js/convert.js"
