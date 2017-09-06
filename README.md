@@ -20,7 +20,7 @@ The package requires the following software to be installed:
 
 Debian/Ubunut:
 
-    sudo apt install unoconv libreoffice-dev imagemagick
+    sudo apt install unoconv libreoffice-dev imagemagick poppler-utils
 
 
 ## Basic Usage
