@@ -85,6 +85,7 @@ class Converter {
         if(resolve && this.promise == true) {
             this.resolve = resolve;
         }
+
         if(reject && this.promise == true) {
             this.reject = reject;
         }
@@ -191,7 +192,7 @@ class Converter {
                 this.convertedToPng.bind(this)
             )
             .catch(
-                this.next.bind(this)
+                this.run.bind(this)
             );
     }
 
