@@ -21,6 +21,7 @@ class Converter {
         this.outputType = options.outputType || 'png';
         this.logLevel = options.logLevel || 1;
         this.callback = options.callback || null;
+        this.fileNameFormat = options.fileNameFormat || '_page_%d',
         this.song = 0;
         this.start = Date.now();
         this.songConvertTime = this.start;
@@ -29,6 +30,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
+        this.version = '0.1.0';
     }
 
     /**
@@ -158,7 +160,7 @@ class Converter {
         var pdfFile = this.output + song;
         var pngFile = this.output + numbers.join('_');
         var converter = pdf2image.compileConverter({
-            outputFormat: pngFile + '_page_%d',
+            outputFormat: pngFile + this.fileNameFormat,
             outputType:   this.outputType
         });
 
