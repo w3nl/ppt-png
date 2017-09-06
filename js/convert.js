@@ -18,6 +18,7 @@ class Converter {
         this.invert = options.invert || false;
         this.deletePdfFile = options.deletePdfFile || true;
         this.outputType = options.outputType || 'png';
+        this.logLevel = options.logLevel || 1;
         this.song = 0;
         this.start = Date.now();
 
@@ -30,8 +31,8 @@ class Converter {
     next() {
         var time = Date.now() - this.start;
 
-        if(this.files.length < 1) {
-            if(this.song > 0) {
+        if (this.files.length < 1) {
+            if (this.song > 0 && this.logLevel >= 1) {
                 console.log('Total time: ' + time + 'ms for ' + this.song + ' songs');
             }
 
@@ -39,7 +40,10 @@ class Converter {
         }
 
         this.song++;
-        console.log('song: ' + this.song + ' time: ' + time + ' ms');
+        if (this.logLevel >= 1) {
+            console.log('song: ' + this.song + ' time: ' + time + ' ms');
+        }
+
         this.currentFile = this.files.pop();
 
         this.convert(this.currentFile, this.song);
@@ -52,7 +56,10 @@ class Converter {
      * @param {int} song
      */
     convert(file, song) {
-        console.log('convert');
+        if (this.logLevel >= 2) {
+            console.log('convert');
+        }
+
         unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, song));
     }
 
@@ -70,10 +77,14 @@ class Converter {
             outputType:   this.outputType
         });
 
-        console.log('converted to pdf');
+        if (this.logLevel >= 2) {
+            console.log('converted to pdf');
+        }
 
         if (error) {
-            console.error('error on converting to pdf');
+            if (this.logLevel >= 1) {
+                console.error('error on converting to pdf');
+            }
 
             this.next();
 
@@ -83,7 +94,9 @@ class Converter {
         // result is returned as a Buffer
         fs.writeFile(file + '.pdf', result);
 
-        console.log('pdf saved');
+        if (this.logLevel >= 2) {
+            console.log('pdf saved');
+        }
 
         // converts all the pages of the given pdf using the default options
         converter.convertPDF(file + '.pdf')
@@ -101,12 +114,15 @@ class Converter {
      * @param {array} pageList
      */
     convertedToPng(pageList) {
-        console.log('converted to ' + this.outputType);
-        if(this.deletePdfFile) {
+        if (this.logLevel >= 2) {
+            console.log('converted to ' + this.outputType);
+        }
+
+        if (this.deletePdfFile) {
             this.deletePdf();
         }
 
-        if(this.invert) {
+        if (this.invert) {
             pageList.forEach(this.page.bind(this));
         }
 
@@ -133,7 +149,9 @@ class Converter {
      */
     invertPage(file, error, image) {
         if (error) {
-            console.error('invering page error', error);
+            if (this.logLevel >= 1) {
+                console.error('invering page error', error);
+            }
 
             return;
         }
@@ -148,12 +166,14 @@ class Converter {
     deletePdf() {
         var file = this.output + this.song + '.pdf';
 
-        console.log('delete pdf');
+        if (this.logLevel >= 2) {
+            console.log('delete pdf');
+        }
 
         fs.exists(file, function(exists) {
             if (exists) {
                 fs.unlink(file, function(error) {
-                    if(error) {
+                    if (error && this.logLevel >= 1) {
                         console.error('cannot delete pdf', error);
                     }
                 });

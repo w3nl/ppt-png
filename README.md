@@ -42,6 +42,8 @@ deletePdfFile: Delete the pdf file after converting, default is `true`.
 
 outputType: Output type, default is `png`.
 
+logLevel: Set the log level, default is `1`.
+
 
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg
 [npm-url]: https://www.npmjs.com/package/ppt-png

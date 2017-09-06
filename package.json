@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Convert ppt to png",
     "files": [
         "js/convert.js"
@@ -23,7 +23,7 @@
     "bugs": {
         "url": "https://github.com/w3nl/ppt-png/issues"
     },
-    "license": "MIT",
+    "license": "GPL-3.0",
     "homepage": "https://github.com/w3nl/ppt-png#readme",
     "scripts": {
        "lint": "eslint js/*.js --config .eslintrc"
