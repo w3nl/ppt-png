@@ -50,4 +50,30 @@ describe('ppt-png', function() {
                 });
         });
     });
+
+    describe('promise', function() {
+        it('should save without error', function() {
+            new Converter({
+                files:          ['x.ppt'],
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  true,
+                outputType:     'png',
+                logLevel:       2,
+                fileNameFormat: '_vers_%d'
+            })
+                .wait()
+                .then(function(data) {
+                    if(data.failed.length > 0) {
+                        done();
+                    } else {
+                        done('error');
+                    }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
+        });
+    });
 });

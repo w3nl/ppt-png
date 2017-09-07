@@ -34,7 +34,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.1.4';
+        this.version = '0.1.5';
     }
 
     /**
@@ -50,19 +50,6 @@ class Converter {
         promise = new Promise(this.run.bind(this));
 
         return promise;
-    }
-
-    /**
-     * Add more files.
-     *
-     * @param {array} files
-     *
-     * @return {object}
-     */
-    addFiles(files) {
-        this.files.push(...files);
-
-        return this;
     }
 
     /**
@@ -104,23 +91,6 @@ class Converter {
         });
 
         this.next();
-    }
-
-    /**
-     * Run again failed files.
-     *
-     * @return {object}
-     */
-    resetFailed() {
-        if (this.logLevel >= 1) {
-            console.error('Reset files: ' + this.failed.length);
-        }
-
-        this.files = this.failed.multikey('file');
-
-        this.run();
-
-        return this;
     }
 
     /**
