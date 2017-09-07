@@ -16,3 +16,5 @@ before_script:
   - npm run lint
 git:
   depth: 10
+cache:
+  yarn: true
