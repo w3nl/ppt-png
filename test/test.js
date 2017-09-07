@@ -15,7 +15,7 @@ describe('ppt-png', function() {
                 logLevel:       3,
                 fileNameFormat: '_vers_%d',
                 callback:       function(data) {
-                    if(data.failed.length > 0) {
+                    if(data.failed.length > 0 || data.success.length < 1) {
                         done(data.failed);
                     } else {
                         done();
@@ -39,7 +39,7 @@ describe('ppt-png', function() {
             })
                 .wait()
                 .then(function(data) {
-                    if(data.failed.length > 0) {
+                    if(data.failed.length > 0 || data.success.length < 1) {
                         done(data.failed);
                     } else {
                         done();
@@ -65,7 +65,7 @@ describe('ppt-png', function() {
             })
                 .wait()
                 .then(function(data) {
-                    if(data.failed.length > 0) {
+                    if(data.failed.length > 0 || data.success.length < 1) {
                         done();
                     } else {
                         done('error');
