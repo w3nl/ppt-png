@@ -84,6 +84,10 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
+array-helpers@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.0.0.tgz#feedd3a4ca62642beb3a2770030608efa68de7bf"
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
@@ -1620,10 +1624,6 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
-
-way2web-helpers@0.1.x:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/way2web-helpers/-/way2web-helpers-0.1.0.tgz#5d5c2ecfc2a5b876faf1204dcf3401816978c905"
 
 which@^1.1.1, which@^1.2.9:
   version "1.3.0"

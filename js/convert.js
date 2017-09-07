@@ -3,7 +3,7 @@ const Jimp = require('jimp');
 const pdf2image = require('pdf2image');
 const unoconv = require('unoconv2');
 
-require('way2web-helpers');
+require('array-helpers');
 
 /**
  * PPT to Image converter.
