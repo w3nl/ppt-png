@@ -15,9 +15,13 @@ describe('ppt-png', function() {
                 logLevel:       3,
                 fileNameFormat: '_vers_%d',
                 callback:       function(data) {
-                    console.log(data.failed, data.success.length, data.files.length, data.time);
+                    if(data.failed.length > 0) {
+                        done(data.failed);
+                    } else {
+                        done();
+                    }
                 }
-            }).addFiles(files).run();
+            }).run();
         });
     });
 
