@@ -1,11 +1,12 @@
 var assert = require('assert');
 var Converter = require('../js/convert.js');
+var files = ['test/OPW 733 Tienduizend redenen.ppt'];
 
 describe('ppt-png', function() {
     describe('normal', function() {
         it('should save without error', function() {
             new Converter({
-                files:          ['test/OPW 733 Tienduizend redenen.ppt'],
+                files:          files,
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
@@ -16,14 +17,14 @@ describe('ppt-png', function() {
                 callback:       function(data) {
                     console.log(data.failed, data.success.length, data.files.length, data.time);
                 }
-            }).run();
+            }).addFiles(files).run();
         });
     });
 
     describe('promise', function() {
         it('should save without error', function() {
             new Converter({
-                files:          ['test/OPW 733 Tienduizend redenen.ppt'],
+                files:          files,
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
