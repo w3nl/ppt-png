@@ -1,8 +1,11 @@
-sudo: false
+sudo: true
 language: node_js
 node_js:
   - "6"
   - "7"
   - "8"
+before_script:
+  - apt install unoconv libreoffice-dev imagemagick poppler-utils
+  - npm run lint
 git:
-depth: 10
+  depth: 10
