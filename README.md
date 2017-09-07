@@ -1,7 +1,7 @@
 # ppt-png
 Convert ppt to image (png,jpg).
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-stats]
 
 If you want convert powerpoint files to png or jpg images, you can do it with this script.
 
@@ -91,3 +91,4 @@ time: The total time the script was running.
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg
 [npm-url]: https://www.npmjs.com/package/ppt-png
 [npm-image]: https://img.shields.io/npm/v/ppt-png.svg
+[npm-stats]: https://npm-stat.com/charts.html?package=ppt-png
