@@ -130,4 +130,34 @@ describe('ppt-png', function() {
                 });
         });
     });
+
+    describe('reset failed', function() {
+        it('should save without error', function() {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  true,
+                outputType:     'png',
+                logLevel:       3,
+                fileNameFormat: '_vers_%d'
+            });
+
+            convertTest.addFiles(files);
+
+            convertTest
+                .wait()
+                .then(function(data) {
+                    convertTest.fail('test');
+                    if(data.failed.length > 0) {
+                        done();
+                    } else {
+                        done('error');
+                    }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
+        });
+    });
 });
