@@ -81,7 +81,7 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
-                deletePdfFile:  true,
+                deletePdfFile:  false,
                 outputType:     'png',
                 logLevel:       2,
                 fileNameFormat: '_vers_%d'
@@ -111,7 +111,7 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
-                deletePdfFile:  true,
+                deletePdfFile:  false,
                 outputType:     'png',
                 logLevel:       2,
                 fileNameFormat: '_vers_%d'
@@ -144,7 +144,7 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
-                deletePdfFile:  true,
+                deletePdfFile:  false,
                 outputType:     'png',
                 logLevel:       3,
                 fileNameFormat: '_vers_%d'
@@ -238,7 +238,7 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
-                deletePdfFile:  false,
+                deletePdfFile:  true,
                 outputType:     'png',
                 logLevel:       3,
                 fileNameFormat: '_vers_%d'
