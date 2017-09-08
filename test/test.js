@@ -167,22 +167,15 @@ describe('ppt-png', function() {
                 fileNameFormat: '_vers_%d'
             });
 
-            convertTest
-                .wait()
-                .then(function(data) {
-                    file = convertTest.convertedToPdf(1, [733], false, 'test');
+            var file = convertTest.convertedToPdf(1, [733], false, 'test');
 
-                    fs.readFile(file, function(error, data) {
-                        if (error) {
-                            done(error);
-                        } else {
-                            done();
-                        }
-                    });
-                })
-                .catch(function(error) {
+            fs.readFile(file, function(error, data) {
+                if (error) {
                     done(error);
-                });
+                } else {
+                    done();
+                }
+            });
         });
     });
 
