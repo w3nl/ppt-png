@@ -152,8 +152,6 @@ describe('ppt-png', function() {
                 fileNameFormat: '_vers_%d'
             });
 
-            convertTest.addFiles(['test/OPW 733 Tienduizend redenen.ppt']);
-
             convertTest
                 .wait()
                 .then(function(data) {
@@ -182,8 +180,6 @@ describe('ppt-png', function() {
                 logLevel:       3,
                 fileNameFormat: '_vers_%d'
             });
-
-            convertTest.addFiles(['test/OPW 733 Tienduizend redenen.ppt']);
 
             convertTest
                 .wait()
