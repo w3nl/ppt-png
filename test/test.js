@@ -5,14 +5,14 @@ const fs = require('fs');
 describe('ppt-png', function() {
     describe('normal', function() {
         this.timeout(10000);
-        it('Test if the ppt file can convert to a jpg.', function(done) {
+        it('Test if the ppt file can convert to a png.', function(done) {
             new Converter({
                 files:          ['test/OPW 733 Tienduizend redenen.ppt'],
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
                 deletePdfFile:  true,
-                outputType:     'jpg',
+                outputType:     'png',
                 logLevel:       3,
                 fileNameFormat: '_vers_%d',
                 callback:       function(data) {
