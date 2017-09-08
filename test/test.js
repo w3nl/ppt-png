@@ -76,4 +76,50 @@ describe('ppt-png', function() {
                 });
         });
     });
+
+    describe('add files', function() {
+        it('should save without error', function() {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  true,
+                outputType:     'png',
+                logLevel:       2,
+                fileNameFormat: '_vers_%d'
+            });
+
+            convertTest.addFiles(files);
+
+            if(data.failed.length == 1) {
+                done();
+            } else {
+                done('error');
+            }
+        });
+    });
+
+    describe('reset failed', function() {
+        it('should save without error', function() {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  true,
+                outputType:     'png',
+                logLevel:       2,
+                fileNameFormat: '_vers_%d'
+            });
+
+            convertTest.failed = files;
+
+            convertTest.resetFailed();
+
+            if(data.failed.length == 0 && data.files == 1) {
+                done();
+            } else {
+                done('error');
+            }
+        });
+    });
 });
