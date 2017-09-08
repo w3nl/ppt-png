@@ -85,8 +85,8 @@ argparse@^1.0.7:
     sprintf-js "~1.0.2"
 
 array-helpers@1.0.x:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.0.0.tgz#feedd3a4ca62642beb3a2770030608efa68de7bf"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.0.1.tgz#87c044a3c22ff95d963ae2f2e4cffe7b3bd13524"
 
 array-union@^1.0.1:
   version "1.0.2"
