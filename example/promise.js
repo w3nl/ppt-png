@@ -4,7 +4,7 @@ var glob = require('glob');
 require('array-helpers');
 
 // options is optional
-glob('input/test/*.ppt', {}, convert);
+glob('input/test/*.ppt*', {}, convert);
 
 /**
  * Convert the files.
