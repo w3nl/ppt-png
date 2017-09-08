@@ -91,11 +91,18 @@ describe('ppt-png', function() {
 
             convertTest.addFiles(files);
 
-            if(data.failed.length == 1) {
-                done();
-            } else {
-                done('error');
-            }
+            convertTest
+                .wait()
+                .then(function(data) {
+                    if(data.failed.length > 0 || data.success.length < 1) {
+                        done();
+                    } else {
+                        done('error');
+                    }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
         });
     });
 
@@ -115,11 +122,18 @@ describe('ppt-png', function() {
 
             convertTest.resetFailed();
 
-            if(data.failed.length == 0 && data.files == 1) {
-                done();
-            } else {
-                done('error');
-            }
+            convertTest
+                .wait()
+                .then(function(data) {
+                    if(data.failed.length > 0 || data.success.length < 1) {
+                        done();
+                    } else {
+                        done('error');
+                    }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
         });
     });
 });
