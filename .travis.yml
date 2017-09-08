@@ -1,14 +1,14 @@
 sudo: true
-dist: trusty
-addons:
 os:
   - linux
-apt:
-  packages:
-    - unoconv
-    - libreoffice-dev
-    - imagemagick
-    - poppler-utils
+dist: trusty
+addons:
+    apt:
+      packages:
+        - unoconv
+        - libreoffice-dev
+        - imagemagick
+        - poppler-utils
 language: node_js
 node_js:
   - "6"
