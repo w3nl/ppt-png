@@ -105,6 +105,39 @@ describe('ppt-png', function() {
         });
     });
 
+    describe('reset failed', function() {
+        this.timeout(10000);
+        it('Test the resetFailed function.', function(done) {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  true,
+                outputType:     'png',
+                logLevel:       2,
+                fileNameFormat: '_vers_%d'
+            });
+
+            convertTest.failed = [{
+                file: 'test/OPW 733 Tienduizend redenen.ppt'
+            }];
+            convertTest.resetFailed();
+
+            convertTest
+                .wait()
+                .then(function(data) {
+                    if(data.success.length > 0) {
+                        done();
+                    } else {
+                        done(data.failed);
+                    }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
+        });
+    });
+
     describe('fail', function() {
         this.timeout(10000);
         it('Test if the fail function works.', function(done) {
@@ -167,6 +200,56 @@ describe('ppt-png', function() {
                 .catch(function(error) {
                     done(error);
                 });
+        });
+    });
+
+    describe('process page', function() {
+        this.timeout(10000);
+        it('Check if the process page to png works.', function(done) {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  false,
+                outputType:     'png',
+                logLevel:       3,
+                fileNameFormat: '_vers_%d'
+            });
+
+            convertTest.processPage('test/OPW 733 Tienduizend redenen.ppt', true, null);
+
+            convertTest.wait()
+                .then(function(data) {
+                    if(data.failed.length > 0 || data.success.length < 1) {
+                        done();
+                    } else {
+                        done('error');
+                    }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
+        });
+    });
+
+    describe('convert', function() {
+        this.timeout(10000);
+        it('Check if the convert fail works.', function(done) {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  false,
+                outputType:     'png',
+                logLevel:       3,
+                fileNameFormat: '_vers_%d'
+            });
+
+            if(convertTest.convert()) {
+                done('error');
+            } else {
+                done();
+            }
         });
     });
 });
