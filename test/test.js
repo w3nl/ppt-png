@@ -1,12 +1,13 @@
-var assert = require('assert');
-var Converter = require('../js/convert.js');
-var files = ['test/OPW 733 Tienduizend redenen.ppt'];
+const assert = require('assert');
+const Converter = require('../js/convert.js');
+const fs = require('fs');
 
 describe('ppt-png', function() {
     describe('normal', function() {
-        it('Test if the ppt file can convert to a jpg.', function() {
+        this.timeout(10000);
+        it('Test if the ppt file can convert to a jpg.', function(done) {
             new Converter({
-                files:          files,
+                files:          ['test/OPW 733 Tienduizend redenen.ppt'],
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
@@ -26,14 +27,16 @@ describe('ppt-png', function() {
     });
 
     describe('promise', function() {
-        it('Test with the promise.', function() {
+        this.timeout(10000);
+        it('Test with the promise.', function(done) {
             new Converter({
-                files:         files,
+                files:         ['test/OPW 733 Tienduizend redenen.ppt'],
                 output:        'output/test/',
                 deletePdfFile: true
             })
                 .wait()
                 .then(function(data) {
+                    console.log(data);
                     if(data.failed.length > 0 || data.success.length < 1) {
                         done(data.failed);
                     } else {
@@ -47,7 +50,8 @@ describe('ppt-png', function() {
     });
 
     describe('failed', function() {
-        it('Test if the fail function works on not existing files.', function() {
+        this.timeout(10000);
+        it('Test if the fail function works on not existing files.', function(done) {
             new Converter({
                 files:          ['x.ppt'],
                 output:         'output/test/',
@@ -72,7 +76,8 @@ describe('ppt-png', function() {
     });
 
     describe('add files', function() {
-        it('Test the addFiles function.', function() {
+        this.timeout(10000);
+        it('Test the addFiles function.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
                 invert:         true,
@@ -83,46 +88,15 @@ describe('ppt-png', function() {
                 fileNameFormat: '_vers_%d'
             });
 
-            convertTest.addFiles(files);
+            convertTest.addFiles(['test/OPW 733 Tienduizend redenen.ppt']);
 
             convertTest
                 .wait()
                 .then(function(data) {
                     if(data.failed.length > 0 || data.success.length < 1) {
-                        done();
+                        done(data.failed);
                     } else {
-                        done('error');
-                    }
-                })
-                .catch(function(error) {
-                    done(error);
-                });
-        });
-    });
-
-    describe('reset failed', function() {
-        it('Test the resetFailed function.', function() {
-            var convertTest = new Converter({
-                output:         'output/test/',
-                invert:         true,
-                greyscale:      true,
-                deletePdfFile:  true,
-                outputType:     'png',
-                logLevel:       2,
-                fileNameFormat: '_vers_%d'
-            });
-
-            convertTest.failed = files;
-
-            convertTest.resetFailed();
-
-            convertTest
-                .wait()
-                .then(function(data) {
-                    if(data.failed.length > 0 || data.success.length < 1) {
                         done();
-                    } else {
-                        done('error');
                     }
                 })
                 .catch(function(error) {
@@ -132,7 +106,8 @@ describe('ppt-png', function() {
     });
 
     describe('fail', function() {
-        it('Test if the fail function works.', function() {
+        this.timeout(10000);
+        it('Test if the fail function works.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
                 invert:         true,
@@ -143,7 +118,7 @@ describe('ppt-png', function() {
                 fileNameFormat: '_vers_%d'
             });
 
-            convertTest.addFiles(files);
+            convertTest.addFiles(['test/OPW 733 Tienduizend redenen.ppt']);
 
             convertTest
                 .wait()
@@ -154,6 +129,40 @@ describe('ppt-png', function() {
                     } else {
                         done('error');
                     }
+                })
+                .catch(function(error) {
+                    done(error);
+                });
+        });
+    });
+
+    describe('convert to png', function() {
+        this.timeout(10000);
+        it('Check if the convert to png works.', function(done) {
+            var convertTest = new Converter({
+                output:         'output/test/',
+                invert:         true,
+                greyscale:      true,
+                deletePdfFile:  false,
+                outputType:     'png',
+                logLevel:       3,
+                fileNameFormat: '_vers_%d'
+            });
+
+            convertTest.addFiles(['test/OPW 733 Tienduizend redenen.ppt']);
+
+            convertTest
+                .wait()
+                .then(function(data) {
+                    file = convertTest.convertedToPdf(1, [733], false, 'test');
+
+                    fs.readFile(file, function(error, data) {
+                        if (error) {
+                            done(error);
+                        } else {
+                            done();
+                        }
+                    });
                 })
                 .catch(function(error) {
                     done(error);

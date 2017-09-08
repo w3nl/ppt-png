@@ -34,7 +34,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.1.6';
+        this.version = '0.1.7';
     }
 
     /**
@@ -182,12 +182,18 @@ class Converter {
      * @param {int} index
      */
     convert(file, index) {
-        var fileName = file.split('/').pop();
-        var numbers = fileName.match(/\d+/g);
+        var fileName = file ? file.split('/').pop() : null;
+        var numbers;
+
+        if(!fileName) {
+            return;
+        }
 
         if (this.logLevel >= 2) {
             console.log('Convert: ' + file);
         }
+
+        numbers = fileName.match(/\d+/g);
 
         unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, index, numbers));
     }
@@ -199,10 +205,12 @@ class Converter {
      * @param {array} numbers
      * @param {object} error
      * @param {object} result
+     *
+     * @return {string}
      */
     convertedToPdf(index, numbers, error, result) {
         var pdfFile = this.output + index + '.pdf';
-        var imageFile = this.output + numbers.join('_');
+        var imageFile = this.output + (numbers ? numbers.join('_') : index);
         var converter = pdf2image.compileConverter({
             outputFormat: imageFile + this.fileNameFormat,
             outputType:   this.outputType
@@ -242,6 +250,8 @@ class Converter {
             .catch(
                 this.fail.bind(this)
             );
+
+        return pdfFile;
     }
 
     /**

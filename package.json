@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "js/convert.js"
@@ -31,6 +31,7 @@
     "scripts": {
         "lint": "eslint js/*.js --config .eslintrc",
         "test": "mocha --reporter spec",
+        "cover-check": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
     },
     "devDependencies": {
