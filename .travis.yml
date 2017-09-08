@@ -1,6 +1,8 @@
 sudo: true
 dist: trusty
 addons:
+os:
+  - linux
 apt:
   packages:
     - unoconv
@@ -13,6 +15,7 @@ node_js:
   - "7"
   - "8"
 before_script:
+  - sudo VERSION=$VERSION bash ci/linux.bash
   - npm run lint
 after_script:
   - npm run coveralls

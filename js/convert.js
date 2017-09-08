@@ -34,7 +34,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.1.7';
+        this.version = '0.1.8';
     }
 
     /**
