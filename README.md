@@ -88,6 +88,21 @@ files: An array with files send to the script.
 time: The total time the script was running.
 
 
+## Test the package.
+
+```
+npm test
+```
+
+This will run all the tests in the test folder with mocha.
+
+If you only want to check the eslint rules, just run.
+
+```
+npm run lint
+```
+
+
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg
 [npm-url]: https://www.npmjs.com/package/ppt-png
 [npm-image]: https://img.shields.io/npm/v/ppt-png.svg
