@@ -91,19 +91,11 @@ describe('ppt-png', function() {
 
             convertTest.addFiles(['test/OPW 733 Tienduizend redenen.ppt']);
 
-            convertTest
-                .wait()
-                .then(function(data) {
-                    if(data.failed.length > 0 || data.success.length < 1) {
-                        console.log('failure:' + data.failed[0].failure);
-                        done(data.failed[0].error);
-                    } else {
-                        done();
-                    }
-                })
-                .catch(function(error) {
-                    done(error);
-                });
+            if(convertTest.files.length > 0) {
+                done();
+            } else {
+                done('error');
+            }
         });
     });
 
@@ -125,21 +117,11 @@ describe('ppt-png', function() {
             }];
             convertTest.resetFailed();
 
-            convertTest
-                .wait()
-                .then(function(data) {
-                    if(data.success.length > 0) {
-                        done();
-                    } else if(data.failed.length > 0) {
-                        console.log('failure:' + data.failed[0].failure);
-                        done(data.failed[0].error);
-                    } else {
-                        done('error');
-                    }
-                })
-                .catch(function(error) {
-                    done(error);
-                });
+            if(convertTest.failed.length < 1 && convertTest.files.length == 1) {
+                done();
+            } else {
+                done('error');
+            }
         });
     });
 
