@@ -4,7 +4,7 @@ var files = ['test/OPW 733 Tienduizend redenen.ppt'];
 
 describe('ppt-png', function() {
     describe('normal', function() {
-        it('should save without error', function() {
+        it('Test if the ppt file can convert to a jpg.', function() {
             new Converter({
                 files:          files,
                 output:         'output/test/',
@@ -26,7 +26,7 @@ describe('ppt-png', function() {
     });
 
     describe('promise', function() {
-        it('should save without error', function() {
+        it('Test with the promise.', function() {
             new Converter({
                 files:         files,
                 output:        'output/test/',
@@ -46,8 +46,8 @@ describe('ppt-png', function() {
         });
     });
 
-    describe('promise', function() {
-        it('should save without error', function() {
+    describe('failed', function() {
+        it('Test if the fail function works on not existing files.', function() {
             new Converter({
                 files:          ['x.ppt'],
                 output:         'output/test/',
@@ -72,7 +72,7 @@ describe('ppt-png', function() {
     });
 
     describe('add files', function() {
-        it('should save without error', function() {
+        it('Test the addFiles function.', function() {
             var convertTest = new Converter({
                 output:         'output/test/',
                 invert:         true,
@@ -101,7 +101,7 @@ describe('ppt-png', function() {
     });
 
     describe('reset failed', function() {
-        it('should save without error', function() {
+        it('Test the resetFailed function.', function() {
             var convertTest = new Converter({
                 output:         'output/test/',
                 invert:         true,
@@ -131,8 +131,8 @@ describe('ppt-png', function() {
         });
     });
 
-    describe('reset failed', function() {
-        it('should save without error', function() {
+    describe('fail', function() {
+        it('Test if the fail function works.', function() {
             var convertTest = new Converter({
                 output:         'output/test/',
                 invert:         true,
