@@ -28,14 +28,9 @@ describe('ppt-png', function() {
     describe('promise', function() {
         it('should save without error', function() {
             new Converter({
-                files:          files,
-                output:         'output/test/',
-                invert:         true,
-                greyscale:      true,
-                deletePdfFile:  true,
-                outputType:     'png',
-                logLevel:       2,
-                fileNameFormat: '_vers_%d'
+                files:         files,
+                output:        'output/test/',
+                deletePdfFile: true
             })
                 .wait()
                 .then(function(data) {
@@ -58,7 +53,6 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
-                deletePdfFile:  true,
                 outputType:     'png',
                 logLevel:       2,
                 fileNameFormat: '_vers_%d'
