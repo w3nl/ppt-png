@@ -15,7 +15,7 @@ class Converter {
      * @param {object} options
      */
     constructor(options) {
-        this.files = options.files;
+        this.files = options.files || [];
         this.filesDone = [];
         this.output = options.output;
         this.invert = options.invert || false;
@@ -91,6 +91,35 @@ class Converter {
         });
 
         this.next();
+    }
+
+    /**
+     * Add more files.
+     *
+     * @param {array} files
+     *
+     * @return {object}
+     */
+    addFiles(files) {
+        this.files.push(...files);
+
+        return this;
+    }
+
+    /**
+     * Run again failed files.
+     *
+     * @return {object}
+     */
+    resetFailed() {
+        if (this.logLevel >= 1) {
+            console.error('Reset files: ' + this.failed.length);
+        }
+
+        this.files = this.failed.multikey('file');
+        this.failed = [];
+
+        return this;
     }
 
     /**
