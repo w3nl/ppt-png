@@ -11,13 +11,13 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
-                deletePdfFile:  false,
+                deletePdfFile:  true,
                 outputType:     'jpg',
                 logLevel:       3,
                 fileNameFormat: '_vers_%d',
                 callback:       function(data) {
                     if(data.failed.length > 0 || data.success.length < 1) {
-                        done(data.failed);
+                        done('converting failed');
                     } else {
                         done();
                     }
@@ -30,13 +30,11 @@ describe('ppt-png', function() {
         this.timeout(10000);
         it('Test with the promise.', function(done) {
             new Converter({
-                files:         ['test/OPW 733 Tienduizend redenen.ppt'],
-                output:        'output/test/',
-                deletePdfFile: true
+                files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+                output: 'output/test/'
             })
                 .wait()
                 .then(function(data) {
-                    console.log(data);
                     if(data.failed.length > 0 || data.success.length < 1) {
                         done(data.failed);
                     } else {
@@ -57,6 +55,7 @@ describe('ppt-png', function() {
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
+                deletePdfFile:  false,
                 outputType:     'png',
                 logLevel:       2,
                 fileNameFormat: '_vers_%d'
