@@ -6,6 +6,7 @@ addons:
     apt:
       packages:
         - unoconv
+        - libreoffice
         - libreoffice-dev
         - imagemagick
         - poppler-utils
