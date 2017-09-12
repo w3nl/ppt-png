@@ -1,5 +1,5 @@
-const assert = require('assert');
-const Converter = require('../js/convert.js');
+var assert = require('assert');
+var Converter = require('../js/convert.js');
 const fs = require('fs');
 
 describe('ppt-png', function() {
@@ -50,7 +50,6 @@ describe('ppt-png', function() {
     });
 
     describe('failed', function() {
-        this.timeout(10000);
         it('Test if the fail function works on not existing files.', function(done) {
             new Converter({
                 files:          ['x.ppt'],
@@ -77,7 +76,6 @@ describe('ppt-png', function() {
     });
 
     describe('add files', function() {
-        this.timeout(10000);
         it('Test the addFiles function.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
@@ -100,7 +98,6 @@ describe('ppt-png', function() {
     });
 
     describe('reset failed', function() {
-        this.timeout(10000);
         it('Test the resetFailed function.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
@@ -126,7 +123,6 @@ describe('ppt-png', function() {
     });
 
     describe('fail', function() {
-        this.timeout(10000);
         it('Test if the fail function works.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
@@ -155,7 +151,6 @@ describe('ppt-png', function() {
     });
 
     describe('convert to png', function() {
-        this.timeout(10000);
         it('Check if the convert to png works.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
@@ -180,7 +175,6 @@ describe('ppt-png', function() {
     });
 
     describe('process page', function() {
-        this.timeout(10000);
         it('Check if the process page to png works.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
@@ -209,7 +203,6 @@ describe('ppt-png', function() {
     });
 
     describe('convert', function() {
-        this.timeout(10000);
         it('Check if the convert fail works.', function(done) {
             var convertTest = new Converter({
                 output:         'output/test/',
