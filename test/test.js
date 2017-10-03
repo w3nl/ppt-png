@@ -3,32 +3,6 @@ var Converter = require('../js/convert.js');
 const fs = require('fs');
 
 describe('ppt-png', function() {
-    describe('failed', function() {
-        it('Test if the fail function works on not existing files.', function(done) {
-            new Converter({
-                files:          ['x.ppt'],
-                output:         'output/test/',
-                invert:         true,
-                greyscale:      true,
-                deletePdfFile:  false,
-                outputType:     'png',
-                logLevel:       2,
-                fileNameFormat: '_vers_%d'
-            })
-                .wait()
-                .then(function(data) {
-                    if(data.failed.length > 0 || data.success.length < 1) {
-                        done();
-                    } else {
-                        done('error');
-                    }
-                })
-                .catch(function(error) {
-                    done(error);
-                });
-        });
-    });
-
     describe('add files', function() {
         it('Test the addFiles function.', function(done) {
             var convertTest = new Converter({
