@@ -182,8 +182,19 @@ class Converter {
      * @param {int} index
      */
     convert(file, index) {
-        var fileName = file ? file.split('/').pop() : null;
+        var fileName = null;
+        var filePath = null;
         var numbers;
+
+        if (!file) {
+            return;
+        } else if (typeof file == 'object') {
+            fileName = file.originalname;
+            filePath = file.path;
+        } else {
+            fileName = file.split('/').pop();
+            filePath = file;
+        }
 
         if(!fileName) {
             return;
@@ -195,7 +206,7 @@ class Converter {
 
         numbers = fileName.match(/\d+/g);
 
-        unoconv.convert(file, 'pdf', {}, this.convertedToPdf.bind(this, index, numbers));
+        unoconv.convert(filePath, 'pdf', {}, this.convertedToPdf.bind(this, index, numbers));
     }
 
     /**
