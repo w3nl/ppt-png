@@ -35,7 +35,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.2.1';
+        this.version = '0.2.2';
     }
 
     /**
@@ -44,7 +44,7 @@ class Converter {
      * @return {object}
      */
     wait() {
-        var promise;
+        let promise;
 
         this.promise = true;
 
@@ -127,9 +127,9 @@ class Converter {
      * Get the next file.
      */
     next() {
-        var totalTime = Date.now() - this.start;
-        var fileTime = Date.now() - this.fileConvertTime;
-        var response;
+        const totalTime = Date.now() - this.start;
+        const fileTime = Date.now() - this.fileConvertTime;
+        let response;
 
         this.fileConvertTime = Date.now();
 
@@ -183,9 +183,9 @@ class Converter {
      * @param {int} index
      */
     convert(file, index) {
-        var fileName = null;
-        var filePath = null;
-        var numbers;
+        let fileName = null;
+        let filePath = null;
+        let numbers;
 
         if (!file) {
             return;
@@ -223,9 +223,9 @@ class Converter {
      * @return {string}
      */
     convertedToPdf(index, numbers, fileName, error, result) {
-        var pdfFile = this.output + path.parse(fileName).name + '.pdf';
-        var imageFile = this.output + (numbers ? numbers.join('_') : index);
-        var converter = pdf2image.compileConverter({
+        const pdfFile = this.output + path.parse(fileName).name + '.pdf';
+        const imageFile = this.output + (numbers ? numbers.join('_') : index);
+        const converter = pdf2image.compileConverter({
             outputFormat: imageFile + this.fileNameFormat,
             outputType:   this.outputType
         });
@@ -296,7 +296,7 @@ class Converter {
      * @param {object} element
      */
     page(element) {
-        var file = element.path;
+        const file = element.path;
 
         Jimp.read(file, this.processPage.bind(this, file));
     }
@@ -339,15 +339,15 @@ class Converter {
      * @param {string} file
      */
     deletePdf() {
-        var file = this.output + this.file + '.pdf';
+        const file = this.output + this.file + '.pdf';
 
         if (this.logLevel >= 2) {
             console.log('Delete pdf: ' + file);
         }
 
-        fs.exists(file, function(exists) {
+        fs.exists(file, (exists) => {
             if (exists) {
-                fs.unlink(file, function(error) {
+                fs.unlink(file, (error) => {
                     if (error) {
                         if (this.logLevel >= 1) {
                             console.error('Cannot delete pdf', error);
