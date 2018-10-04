@@ -9,7 +9,6 @@ If you want convert powerpoint files to png or jpg images, you can do it with th
 
 The package requires the following software to be installed:
 
-* unoconv
 * LibreOffice-dev
 * ImageMagick
 * pdfinfo
@@ -20,7 +19,7 @@ The package requires the following software to be installed:
 
 Debian/Ubuntu:
 
-    sudo apt install unoconv libreoffice-dev imagemagick poppler-utils
+    sudo apt install libreoffice-dev imagemagick poppler-utils
 
 
 ## Basic Usage

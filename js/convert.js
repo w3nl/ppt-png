@@ -1,7 +1,8 @@
 const fs = require('fs');
 const Jimp = require('jimp');
 const pdf2image = require('pdf2image');
-const unoconv = require('unoconv2');
+const exec = require('child_process').exec;
+const path = require('path');
 
 require('array-helpers');
 
@@ -34,7 +35,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.1.8';
+        this.version = '0.2.0';
     }
 
     /**
@@ -206,7 +207,8 @@ class Converter {
 
         numbers = fileName.match(/\d+/g);
 
-        unoconv.convert(filePath, 'pdf', {}, this.convertedToPdf.bind(this, index, numbers));
+        exec('libreoffice --headless --convert-to pdf --outdir ' + this.output + ' \'' + filePath + '\'',
+            this.convertedToPdf.bind(this, index, numbers, fileName));
     }
 
     /**
@@ -214,13 +216,14 @@ class Converter {
      *
      * @param {int} index
      * @param {array} numbers
+     * @param {string} fileName
      * @param {object} error
      * @param {object} result
      *
      * @return {string}
      */
-    convertedToPdf(index, numbers, error, result) {
-        var pdfFile = this.output + index + '.pdf';
+    convertedToPdf(index, numbers, fileName, error, result) {
+        var pdfFile = this.output + path.parse(fileName).name + '.pdf';
         var imageFile = this.output + (numbers ? numbers.join('_') : index);
         var converter = pdf2image.compileConverter({
             outputFormat: imageFile + this.fileNameFormat,
@@ -236,7 +239,7 @@ class Converter {
                 console.error('Error on converting to pdf');
                 this.failed.push({
                     file:    this.currentFile,
-                    failure: 'unoconv',
+                    failure: 'libreoffice convert',
                     error:   error
                 });
             }
@@ -245,9 +248,6 @@ class Converter {
 
             return;
         }
-
-        // result is returned as a Buffer
-        fs.writeFile(pdfFile, result);
 
         if (this.logLevel >= 2) {
             console.log('Pdf saved: ' + pdfFile);
@@ -278,6 +278,8 @@ class Converter {
         if (this.invert || this.greyscale) {
             pageList.forEach(this.page.bind(this));
         }
+
+        console.log('convert to png');
 
         this.success.push(pageList);
 
