@@ -1,3 +1,8 @@
+0.2.1 - 2018-10-04
+=====
+
+* Fix dependencies after audit check.
+
 0.2.0 - 2018-10-04
 =====
 
