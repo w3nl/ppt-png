@@ -1,3 +1,8 @@
+0.2.0 - 2018-10-04
+=====
+
+* Use the libreoffice converter, remove unoconv.
+
 0.1.5 - 2017-09-07
 =====
 
