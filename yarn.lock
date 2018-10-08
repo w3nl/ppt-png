@@ -324,9 +324,9 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
-array-helpers@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.0.1.tgz#87c044a3c22ff95d963ae2f2e4cffe7b3bd13524"
+array-helpers@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.0.4.tgz#ea1be33c9aefbdeccb1e3011b9b0870dbde05c62"
 
 array-union@^1.0.1:
   version "1.0.2"
