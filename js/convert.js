@@ -35,7 +35,7 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.2.4';
+        this.version = '0.3.0';
     }
 
     /**
@@ -197,7 +197,7 @@ class Converter {
             filePath = file;
         }
 
-        if(!fileName) {
+        if (!fileName) {
             return;
         }
 
@@ -322,11 +322,11 @@ class Converter {
             return;
         }
 
-        if(this.greyscale) {
+        if (this.greyscale) {
             image.greyscale();
         }
 
-        if(this.invert) {
+        if (this.invert) {
             image.invert();
         }
 
