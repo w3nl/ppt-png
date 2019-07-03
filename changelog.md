@@ -1,3 +1,8 @@
+0.4.0 2019-07-03
+=====
+
+* Now you are more flexible with the document convert command
+
 0.3.0 2019-06-07
 =====
 

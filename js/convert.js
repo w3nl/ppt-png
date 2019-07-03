@@ -35,7 +35,8 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.version = '0.3.0';
+        this.documentConvert = options.documentConvert || 'libreoffice --headless --convert-to pdf --outdir';
+        this.version = '0.4.0';
     }
 
     /**
@@ -207,7 +208,7 @@ class Converter {
 
         numbers = fileName.match(/\d+/g);
 
-        exec('libreoffice --headless --convert-to pdf --outdir ' + this.output + ' \'' + filePath + '\'',
+        exec(this.documentConvert + this.output + ' \'' + filePath + '\'',
             this.convertedToPdf.bind(this, index, numbers, fileName));
     }
 
@@ -239,7 +240,7 @@ class Converter {
                 console.error('Error on converting to pdf');
                 this.failed.push({
                     file:    this.currentFile,
-                    failure: 'libreoffice convert',
+                    failure: 'Document convert',
                     error:   error
                 });
             }
