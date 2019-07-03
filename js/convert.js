@@ -36,7 +36,7 @@ class Converter {
         this.resolve = null;
         this.reject = null;
         this.documentConvert = options.documentConvert || 'libreoffice --headless --convert-to pdf --outdir';
-        this.version = '0.4.0';
+        this.version = '0.4.1';
     }
 
     /**

@@ -63,6 +63,8 @@ deletePdfFile: Delete the pdf file after converting, default is `true`.
 
 outputType: Output type, default is `png`, but `jpg` is also possible.
 
+documentConvert: Overrule the document convert command, default is `'libreoffice --headless --convert-to pdf --outdir'`
+
 logLevel: Set the log level, default is `1`.
 
 callback: Function calls when the script is ready.
