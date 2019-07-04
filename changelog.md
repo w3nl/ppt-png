@@ -1,3 +1,8 @@
+0.4.2 2019-07-04
+=====
+
+* Add a space after the document convert comnmand
+
 0.4.1 2019-07-03
 =====
 
