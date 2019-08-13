@@ -1,28 +1,27 @@
 sudo: required
 os:
-  - linux
+    - linux
 dist: trusty
 addons:
     apt:
-      packages:
-        - libreoffice
-        - libreoffice-dev
-        - imagemagick
-        - poppler-utils
+        packages:
+            - libreoffice
+            - libreoffice-dev
+            - imagemagick
+            - poppler-utils
 language: node_js
 node_js:
-  - "6"
-  - "8"
-  - "10"
+    - "10"
+    - "12"
 python:
-  - "2.7"
+    - "2.7"
 before_script:
-  - "npm run lint"
-  - "sudo apt-get install ghostscript libreoffice"
-  - "echo '/usr/bin/python' > env"
+    - "npm run lint"
+    - "sudo apt-get install ghostscript libreoffice"
+    - "echo '/usr/bin/python' > env"
 after_script:
-  - npm run coveralls
+    - npm run coveralls
 git:
-  depth: 10
+    depth: 10
 cache:
-  yarn: true
+    yarn: true
