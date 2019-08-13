@@ -1,3 +1,8 @@
+0.4.5 2019-08-13
+=====
+
+* Upgrade the array-helpers package
+
 0.4.4 2019-08-13
 =====
 

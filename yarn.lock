@@ -376,10 +376,10 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
-array-helpers@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.1.1.tgz#e9a710f7c07163797a3012a82027f38f8fa233ba"
-  integrity sha512-tSxkPhgTVzDvSwUk6Yk/6oOYpHRCKJXGxLKI/GUGW+3sdU6Ck4zdTPbl5J+exhYXJRw5O7Af2LsoJ0aA9CpEzQ==
+array-helpers@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/array-helpers/-/array-helpers-1.2.0.tgz#c6e64f32281a1975c197322ab66c1e41632bdc11"
+  integrity sha512-eGh19jBvzUUL6m5VRQrDP3Is75CBKBQvotettZNOMSD2yfGxi+a0HvqxzBvRPnzwOE7PRu+OU8iB3pENbbAEKQ==
 
 asn1@~0.2.3:
   version "0.2.4"
