@@ -1,3 +1,8 @@
+0.4.4 2019-08-13
+=====
+
+* Auto fixes from GitHub to fix potential security vulnerabilities.
+
 0.4.3 2019-08-13
 =====
 
