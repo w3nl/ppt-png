@@ -3,7 +3,7 @@ var glob = require('glob');
 
 // options is optional
 glob('input/test/*.ppt*', {}, function(error, files) {
-    console.log('files: ', files.length);
+    console.log('files: ', files);
     if (files) {
         new Converter({
             files:           files,
@@ -12,11 +12,11 @@ glob('input/test/*.ppt*', {}, function(error, files) {
             greyscale:       true,
             deletePdfFile:   false,
             outputType:      'png',
-            logLevel:        2,
+            logLevel:        5,
             fileNameFormat:  '_vers_%d',
             documentConvert: 'libreoffice --headless --convert-to pdf --outdir',
             callback:        function(data) {
-                console.log(data.failed, data.success.length, data.files.length, data.time);
+                console.log(data);
             }
         }).run();
     }

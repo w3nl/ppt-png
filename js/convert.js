@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Jimp = require('jimp');
-const pdf2image = require('pdf2image');
+const pdf2image = require('./pdf2image.js');
 const exec = require('child_process').exec;
 const path = require('path');
 
@@ -36,7 +36,7 @@ class Converter {
         this.resolve = null;
         this.reject = null;
         this.documentConvert = options.documentConvert || 'libreoffice --headless --convert-to pdf --outdir';
-        this.version = '0.4.5';
+        this.version = '0.5.0';
     }
 
     /**
@@ -228,7 +228,8 @@ class Converter {
         const imageFile = this.output + (numbers ? numbers.join('_') : index);
         const converter = pdf2image.compileConverter({
             outputFormat: imageFile + this.fileNameFormat,
-            outputType:   this.outputType
+            outputType:   this.outputType,
+            stripProfile: true
         });
 
         if (this.logLevel >= 2) {

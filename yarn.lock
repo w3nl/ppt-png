@@ -1663,10 +1663,6 @@ path-key@^2.0.0, path-key@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
-pdf2image@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/pdf2image/-/pdf2image-1.2.3.tgz#ff8851350f0f45ae1637e3d945436ff841b8e987"
-
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
