@@ -1,9 +1,10 @@
 {
     "name": "ppt-png",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
-        "js/convert.js"
+        "js/convert.js",
+        "js/pdf2image.js"
     ],
     "main": "js/convert.js",
     "repository": {
