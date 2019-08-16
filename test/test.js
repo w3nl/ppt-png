@@ -153,6 +153,7 @@ describe('ppt-png', function() {
     describe('convert to png', function() {
         it('Check if the convert to png works.', function(done) {
             var convertTest = new Converter({
+                files:          ['test/OPW 733 Tienduizend redenen.ppt'],
                 output:         'output/test/',
                 invert:         true,
                 greyscale:      true,
@@ -160,9 +161,9 @@ describe('ppt-png', function() {
                 outputType:     'png',
                 logLevel:       5,
                 fileNameFormat: '_vers_%d'
-            });
+            }).run();
 
-            var file = convertTest.convertedToPdf(1, [733], 'a', false);
+            var file = convertTest.convertedToPdf(1, [733], 'OPW 733 Tienduizend redenen', false);
 
             fs.readFile(file, function(error, data) {
                 if (error) {
