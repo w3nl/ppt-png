@@ -25,30 +25,10 @@ class Converter {
     convertPDF(pdfFilePath) {
         return generateConvertPromise(pdfFilePath, this.options);
     }
-    /**
-     * Convert PDF list.
-     *
-     * @param {array} pdfList
-     *
-     * @return {Promise}
-     */
-    convertPDFList(pdfList) {
-        let list = [];
-
-        for (let pdf of pdfList) {
-            list.add(generateConvertPromise(pdf, this.options));
-        }
-
-        return Promise.all(list);
-    }
 }
 
 module.exports.compileConverter = function(options) {
     return new Converter(options);
-};
-
-module.exports.convertPDF = function(pdfFilePath, options = {}) {
-    return generateConvertPromise(pdfFilePath, processOptions(options));
 };
 
 /**
