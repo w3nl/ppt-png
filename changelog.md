@@ -1,4 +1,9 @@
-0.5.2 2019-08-14
+0.5.3 2019-08-16
+=====
+
+* Add more tests
+
+0.5.2 2019-08-16
 =====
 
 * More information about converting errors
