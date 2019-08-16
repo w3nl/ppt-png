@@ -737,7 +737,8 @@ function readPDFInfo(pdfFilePath) {
     return new Promise(function(resolve, reject) {
         exec('pdfinfo "' + pdfFilePath + '"', function(error, stdout, stderr) {
             if (error !== null) {
-                reject(Error('Error reading pdf file.'));
+                console.error(error);
+                reject(Error('Error reading pdf file "' + pdfFilePath + '".'));
             } else {
                 let pdfInfo = {};
                 const infoSplit = stdout.split('\n');

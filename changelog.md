@@ -1,3 +1,8 @@
+0.5.2 2019-08-14
+=====
+
+* More information about converting errors
+
 0.5.1 2019-08-14
 =====
 
