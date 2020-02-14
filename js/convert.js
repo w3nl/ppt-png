@@ -3,6 +3,7 @@ const Jimp = require('jimp');
 const pdf2image = require('./pdf2image.js');
 const exec = require('child_process').exec;
 const path = require('path');
+const process = require('process');
 
 require('array-helpers');
 
@@ -23,9 +24,12 @@ class Converter {
         this.greyscale = options.greyscale || false;
         this.deletePdfFile = options.deletePdfFile || true;
         this.outputType = options.outputType || 'png';
+        this.density = options.density || '96';
+        this.width = options.width;
+        this.height = options.height;
         this.logLevel = options.logLevel || 1;
         this.callback = options.callback || null;
-        this.fileNameFormat = options.fileNameFormat || '_page_%d',
+        this.fileNameFormat = options.fileNameFormat || '_page_%d';
         this.file = 0;
         this.start = Date.now();
         this.fileConvertTime = this.start;
@@ -35,8 +39,14 @@ class Converter {
         this.promise = false;
         this.resolve = null;
         this.reject = null;
-        this.documentConvert = options.documentConvert || 'libreoffice --headless --convert-to pdf --outdir';
-        this.version = '0.5.5';
+        if (options.documentConvert !== undefined) {
+            this.documentConvert = options.documentConvert;
+        } else if (process.platform === 'darwin') {
+            this.documentConvert = '/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf --outdir';
+        } else {
+            this.documentConvert = 'libreoffice --headless --convert-to pdf --outdir';
+        }
+        this.version = '0.5.6';
     }
 
     /**
@@ -229,7 +239,10 @@ class Converter {
         const converter = pdf2image.compileConverter({
             outputFormat: imageFile + this.fileNameFormat,
             outputType:   this.outputType,
-            stripProfile: true
+            stripProfile: true,
+            density:      this.density,
+            width:        this.width,
+            height:       this.height
         });
 
         if (this.logLevel >= 2) {

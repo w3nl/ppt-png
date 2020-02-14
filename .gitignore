@@ -57,6 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# Editors
+.idea
+.vscode
+
 # Project folders
 input
 output
