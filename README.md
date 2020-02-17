@@ -21,13 +21,17 @@ Debian/Ubuntu:
 
     sudo apt install libreoffice-dev imagemagick poppler-utils
 
+Mac:
+
+    brew install imagemagick poppler ghostscript
+
 
 ## Basic Usage
 
 ```
 new Converter({
     files:    files,
-    output:   'output/'
+    output:   'output/',
     invert:   true,
     callback: function(data) {
         console.log(data.failed, data.success, data.files, data.time);
@@ -64,6 +68,12 @@ deletePdfFile: Delete the pdf file after converting, default is `true`.
 outputType: Output type, default is `png`, but `jpg` is also possible.
 
 documentConvert: Overrule the document convert command, default is `'libreoffice --headless --convert-to pdf --outdir'`
+
+density: Density setting to convert the PDF to image at, defaults to 96 DPI
+
+width: Width of the output images if density is not used
+
+height: Height of the output images if density is not used
 
 logLevel: Set the log level, default is `1`.
 

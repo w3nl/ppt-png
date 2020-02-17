@@ -1,3 +1,9 @@
+0.5.6 2020-02-14
+=====
+* Add instructions and support for Mac
+* Add support for specifying PDF -> Image density or size
+* Update dependencies in yarn.lock
+
 0.5.3 2019-08-16
 =====
 
