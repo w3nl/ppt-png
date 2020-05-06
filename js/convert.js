@@ -46,7 +46,7 @@ class Converter {
         } else {
             this.documentConvert = 'libreoffice --headless --convert-to pdf --outdir';
         }
-        this.version = '0.5.6';
+        this.version = '0.5.7';
     }
 
     /**
@@ -218,7 +218,7 @@ class Converter {
 
         numbers = fileName.match(/\d+/g);
 
-        exec(this.documentConvert + ' ' + this.output + ' \'' + filePath + '\'',
+        exec(this.documentConvert + ' \'' + this.output + '\' \'' + filePath + '\'',
             this.convertedToPdf.bind(this, index, numbers, fileName));
     }
 
