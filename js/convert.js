@@ -7,6 +7,8 @@ const process = require('process');
 
 require('array-helpers');
 
+const sOfficeMac = '/Applications/LibreOffice.app/Contents/MacOS/soffice';
+
 /**
  * PPT to Image converter.
  */
@@ -42,7 +44,7 @@ class Converter {
         if (options.documentConvert !== undefined) {
             this.documentConvert = options.documentConvert;
         } else if (process.platform === 'darwin') {
-            this.documentConvert = '/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf --outdir';
+            this.documentConvert = sOfficeMac + ' --headless --convert-to pdf --outdir';
         } else {
             this.documentConvert = 'libreoffice --headless --convert-to pdf --outdir';
         }
