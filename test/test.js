@@ -1,6 +1,9 @@
 var assert = require('assert');
 var Converter = require('../js/convert.js');
 const fs = require('fs');
+const {
+    Arr
+} = require('array-helpers');
 
 describe('ppt-png', function() {
     describe('normal', function() {
@@ -13,7 +16,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  true,
                 outputType:     'png',
-                logLevel:       3,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d',
                 callback:       function(data) {
                     if (data.failed.length > 0 || data.success.length < 1) {
@@ -58,7 +61,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  false,
                 outputType:     'png',
-                logLevel:       2,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             })
                 .wait()
@@ -83,7 +86,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  false,
                 outputType:     'png',
-                logLevel:       2,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             });
 
@@ -105,13 +108,13 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  false,
                 outputType:     'png',
-                logLevel:       2,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             });
 
-            convertTest.failed = [{
+            convertTest.failed = new Arr([{
                 file: 'test/OPW 733 Tienduizend redenen.ppt'
-            }];
+            }]);
             convertTest.resetFailed();
 
             if (convertTest.failed.length < 1 && convertTest.files.length == 1) {
@@ -130,7 +133,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  false,
                 outputType:     'png',
-                logLevel:       3,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             });
 
@@ -159,7 +162,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  false,
                 outputType:     'png',
-                logLevel:       5,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             }).run();
 
@@ -183,7 +186,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  false,
                 outputType:     'png',
-                logLevel:       3,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             });
 
@@ -211,7 +214,7 @@ describe('ppt-png', function() {
                 greyscale:      true,
                 deletePdfFile:  true,
                 outputType:     'png',
-                logLevel:       3,
+                logLevel:       0,
                 fileNameFormat: '_vers_%d'
             });
 
