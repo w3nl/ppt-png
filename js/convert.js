@@ -5,7 +5,11 @@ const exec = require('child_process').exec;
 const path = require('path');
 const process = require('process');
 
-require('array-helpers');
+const {
+    Arr
+} = require('array-helpers');
+
+const sOfficeMac = '/Applications/LibreOffice.app/Contents/MacOS/soffice';
 
 /**
  * PPT to Image converter.
@@ -17,8 +21,8 @@ class Converter {
      * @param {object} options
      */
     constructor(options) {
-        this.files = options.files || [];
-        this.filesDone = [];
+        this.files = options.files || new Arr();
+        this.filesDone = new Arr();
         this.output = options.output;
         this.invert = options.invert || false;
         this.greyscale = options.greyscale || false;
@@ -33,8 +37,8 @@ class Converter {
         this.file = 0;
         this.start = Date.now();
         this.fileConvertTime = this.start;
-        this.success = [];
-        this.failed = [];
+        this.success = new Arr();
+        this.failed = new Arr();
         this.ready = false;
         this.promise = false;
         this.resolve = null;
@@ -42,11 +46,11 @@ class Converter {
         if (options.documentConvert !== undefined) {
             this.documentConvert = options.documentConvert;
         } else if (process.platform === 'darwin') {
-            this.documentConvert = '/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to pdf --outdir';
+            this.documentConvert = sOfficeMac + ' --headless --convert-to pdf --outdir';
         } else {
             this.documentConvert = 'libreoffice --headless --convert-to pdf --outdir';
         }
-        this.version = '0.5.6';
+        this.version = '0.5.7';
     }
 
     /**
@@ -129,7 +133,7 @@ class Converter {
         }
 
         this.files = this.failed.multikey('file');
-        this.failed = [];
+        this.failed = new Arr();
 
         return this;
     }
@@ -218,7 +222,7 @@ class Converter {
 
         numbers = fileName.match(/\d+/g);
 
-        exec(this.documentConvert + ' ' + this.output + ' \'' + filePath + '\'',
+        exec(this.documentConvert + ' \'' + this.output + '\' \'' + filePath + '\'',
             this.convertedToPdf.bind(this, index, numbers, fileName));
     }
 

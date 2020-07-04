@@ -1,3 +1,7 @@
+0.5.7 2020-05-06
+=====
+* Fix for the output in the convert method
+
 0.5.6 2020-02-14
 =====
 * Add instructions and support for Mac
