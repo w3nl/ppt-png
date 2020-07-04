@@ -9,7 +9,6 @@ const {
     Arr
 } = require('array-helpers');
 
-console.log(new Arr());
 const sOfficeMac = '/Applications/LibreOffice.app/Contents/MacOS/soffice';
 
 /**
