@@ -1,4 +1,4 @@
-0.5.7 2020-05-06
+0.6.0 2020-07-04
 =====
 * Fix for the output in the convert method
 
