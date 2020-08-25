@@ -222,8 +222,13 @@ class Converter {
 
         numbers = fileName.match(/\d+/g);
 
-        exec(this.documentConvert + ' \'' + this.output + '\' \'' + filePath + '\'',
-            this.convertedToPdf.bind(this, index, numbers, fileName));
+        if (process.platform === 'win32') {
+            exec(this.documentConvert + ' "' + this.output + '" "' + filePath + '"',
+                this.convertedToPdf.bind(this, index, numbers, fileName));
+        } else {
+            exec(this.documentConvert + ' \'' + this.output + '\' \'' + filePath + '\'',
+                this.convertedToPdf.bind(this, index, numbers, fileName));
+        }
     }
 
     /**
