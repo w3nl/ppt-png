@@ -165,7 +165,11 @@ function processPagesSequentially(
  * @return {string}
  */
 function getFileDirectoryPath(filePath) {
-    return filePath.substring(0, filePath.lastIndexOf('/'));
+    if (process.platform === 'win32') {
+        return filePath.substring(0, filePath.lastIndexOf('\\'));
+    } else {
+        return filePath.substring(0, filePath.lastIndexOf('/'));
+    }
 }
 
 /**
@@ -176,7 +180,11 @@ function getFileDirectoryPath(filePath) {
  * @return {string}
  */
 function getFileNameFromPath(filePath) {
-    const aux = filePath.split('/').pop().split('.');
+    let aux = filePath.split('/').pop().split('.');
+
+    if (process.platform === 'win32') {
+        aux = filePath.split('\\').pop().split('.');
+    }
 
     return aux[0] != '' ? aux[0] : aux[1];
 }
@@ -202,6 +210,10 @@ function getFileNameFromPath(filePath) {
     {...} - a custom piece of code where all of the above values can be used
  */
 function generateOutputFormatFunction(outputFormatString) {
+    if (process.platform === 'win32') {
+        outputFormatString = outputFormatString.replace(/\\/g, '\\\\');
+    }
+    
     let tokenList = [];
     let unreadPos = 0;
     let context = '';
@@ -462,6 +474,7 @@ function createPagePromise(pageNum, pageIndex, totalPagesProcessed, totalPDFPage
             vm
         ) + options.outputType;
         let convertOptions = [];
+        let stripOptions = [];
 
         if (options.density) {
             convertOptions.push('-density ' + options.density);
@@ -475,16 +488,31 @@ function createPagePromise(pageNum, pageIndex, totalPagesProcessed, totalPDFPage
             convertOptions.push('-background ' + options.backgroundColor + ' -flatten');
         }
         if (options.stripProfile != '') {
-            convertOptions.push('-strip');
+            if (process.platform === 'win32') {
+                stripOptions.push('-strip');
+            } else {
+                convertOptions.push('-strip');
+            }
         }
 
-        const aux = util.format(
+        let aux = util.format(
             'convert %s "%s[%d]" "%s"',
             convertOptions.join(' '),
             pdfFilePath,
             pageNum - 1,
             outputString
         );
+        
+        if (process.platform === 'win32') {
+            aux = util.format(
+                'magick.exe %s "%s[%d]" %s "%s"',
+                convertOptions.join(' '),
+                pdfFilePath,
+                pageNum - 1,
+                stripOptions.join(' '),
+                outputString
+            );
+        }
 
         exec(aux, function(err, stdout, stderr) {
             if (err) {
@@ -715,7 +743,13 @@ function positiveIntOrDefault(value, defaultValue) {
  */
 function readPDFInfo(pdfFilePath) {
     return new Promise(function(resolve, reject) {
-        exec('pdfinfo "' + pdfFilePath + '"', function(error, stdout, stderr) {
+        let execPath = 'pdfinfo "' + pdfFilePath + '"';
+        
+        if (process.platform === 'win32') {
+            execPath = 'pdfinfo.exe ' + pdfFilePath;
+        }
+        
+        exec(execPath, function(error, stdout, stderr) {
             if (error !== null) {
                 console.error(error);
                 reject(Error('Error reading pdf file "' + pdfFilePath + '".'));
