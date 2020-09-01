@@ -1,3 +1,7 @@
+0.7.0 2020-09-01
+=====
+* Add Windows support
+
 0.6.0 2020-07-04
 =====
 * Fix for the output in the convert method

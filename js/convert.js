@@ -52,7 +52,7 @@ class Converter {
         } else {
             this.documentConvert = 'libreoffice --headless --convert-to pdf --outdir';
         }
-        this.version = '0.6.0';
+        this.version = '0.7.0';
     }
 
     /**
@@ -215,7 +215,7 @@ class Converter {
             } else {
                 fileName = file.split('/').pop();
             }
-            
+
             filePath = file;
         }
 
@@ -230,11 +230,11 @@ class Converter {
         numbers = fileName.match(/\d+/g);
 
         let execPath = this.documentConvert + ' \'' + this.output + '\' \'' + filePath + '\'';
-        
+
         if (process.platform === 'win32') {
             execPath = this.documentConvert + ' ' + this.output + ' ' + filePath;
         }
-        
+
         exec(execPath, this.convertedToPdf.bind(this, index, numbers, fileName));
     }
 
