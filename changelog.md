@@ -1,3 +1,7 @@
+0.7.1 2020-10-09
+=====
+* Dont check logLevel for failed results
+
 0.7.0 2020-09-01
 =====
 * Add Windows support

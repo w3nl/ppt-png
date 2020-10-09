@@ -343,12 +343,13 @@ class Converter {
         if (error) {
             if (this.logLevel >= 1) {
                 console.error('Inverting page error', error);
-                this.failed.push({
-                    file:    this.currentFile,
-                    failure: 'jimp',
-                    error:   error
-                });
             }
+
+            this.failed.push({
+                file:    this.currentFile,
+                failure: 'jimp',
+                error:   error
+            });
 
             return;
         }
