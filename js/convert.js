@@ -28,7 +28,7 @@ class Converter {
         this.greyscale = options.greyscale || false;
         this.deletePdfFile = options.deletePdfFile || true;
         this.outputType = options.outputType || 'png';
-        this.density = options.density || '96';
+        this.density = options.density;
         this.width = options.width;
         this.height = options.height;
         this.logLevel = options.logLevel || 1;
