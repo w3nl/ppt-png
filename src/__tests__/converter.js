@@ -36,4 +36,13 @@ describe('PPT-PNG converter test', () => {
             });
         }).toThrowError('Output folder doesnt exists');
     });
+
+    it('It should throw an error if the output folder doesnt exists', () => {
+        expect(() => {
+            Converter.create({
+                files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+                output: 'test/OPW 733 Tienduizend redenen.ppt'
+            });
+        }).toThrowError('Output folder doesnt exists');
+    });
 });

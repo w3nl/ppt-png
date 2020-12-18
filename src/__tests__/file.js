@@ -24,5 +24,12 @@ describe('PPT-PNG file model test', () => {
             });
         }).toThrowError('File path should be a string');
     });
-})
-;
+
+    it('It should throw an error if the pathpath isnt a string', () => {
+        expect(() => {
+            File.create({
+                filePath: 'output/'
+            });
+        }).toThrowError('File path doesnt exists');
+    });
+});
