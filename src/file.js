@@ -1,3 +1,8 @@
+import {
+    fileExists
+} from './fs.js';
+
+
 /**
  * File model
  */
@@ -17,6 +22,10 @@ class File {
     setPath(path) {
         if (!path || path.constructor !== String) {
             throw new Error('File path should be a string');
+        }
+
+        if (!fileExists(path)) {
+            throw new Error('File path doesnt exists');
         }
 
         this.path = path;

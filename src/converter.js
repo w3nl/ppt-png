@@ -1,4 +1,7 @@
 import File from './file.js';
+import {
+    folderExists
+} from './fs.js';
 
 /**
  * Converter
@@ -9,6 +12,7 @@ class Converter {
      */
     constructor() {
         this.files = [];
+        this.output = null;
     }
 
     /**
@@ -27,6 +31,23 @@ class Converter {
     }
 
     /**
+     * Set the output path
+     *
+     * @param {string} output
+     */
+    setOutput(output) {
+        if (!output || output.constructor !== String) {
+            throw new Error('Output should be a string');
+        }
+
+        if (!folderExists(output)) {
+            throw new Error('Output folder doesnt exists');
+        }
+
+        this.output = output;
+    }
+
+    /**
      * Create the converter
      *
      * @param {array} files
@@ -34,11 +55,13 @@ class Converter {
      * @return {object}
      */
     static create({
-        files
+        files,
+        output
     }) {
         const converter = new Converter();
 
         converter.setFiles(files);
+        converter.setOutput(output);
 
         return converter;
     }

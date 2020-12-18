@@ -3,10 +3,11 @@ import Converter from '../converter.js';
 describe('PPT-PNG converter test', () => {
     it('It should generate the converter', () => {
         const converter = Converter.create({
-            files: ['path']
+            files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+            output: 'output/'
         });
 
-        expect(converter.files[0].path).toBe('path');
+        expect(converter.files[0].path).toBe('test/OPW 733 Tienduizend redenen.ppt');
         expect(converter.files.length).toBe(1);
     });
 
@@ -17,5 +18,22 @@ describe('PPT-PNG converter test', () => {
             });
         }).toThrowError('Files should be a array');
     });
-})
-;
+
+    it('It should throw an error if the output isnt a string', () => {
+        expect(() => {
+            Converter.create({
+                files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+                output: 42
+            });
+        }).toThrowError('Output should be a string');
+    });
+
+    it('It should throw an error if the output folder doesnt exists', () => {
+        expect(() => {
+            Converter.create({
+                files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+                output: 'unknownfolder/'
+            });
+        }).toThrowError('Output folder doesnt exists');
+    });
+});
