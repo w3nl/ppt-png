@@ -1,3 +1,7 @@
+0.7.2 2020-12-18
+=====
+* Fix the density
+
 0.7.1 2020-10-09
 =====
 * Dont check logLevel for failed results
