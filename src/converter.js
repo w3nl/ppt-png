@@ -1,7 +1,13 @@
 import File from './file.js';
 import {
-    folderExists
+    folderExists,
+    getFileName,
+    makeFileWritable
 } from './fs.js';
+import {
+    exec
+} from 'child_process';
+import path from 'path';
 
 /**
  * Converter
@@ -13,6 +19,7 @@ class Converter {
     constructor() {
         this.files = [];
         this.output = null;
+        this.pptToPdfConverter = 'libreoffice --headless --convert-to pdf --outdir';
     }
 
     /**
@@ -45,6 +52,63 @@ class Converter {
         }
 
         this.output = output;
+    }
+
+    /**
+     * Get the exec path
+     *
+     * @param {string} filePath
+     *
+     * @return {string}
+     */
+    getExecPath(filePath) {
+        return this.pptToPdfConverter + ' \'' + this.output + '\' \'' + filePath + '\'';
+    }
+
+    /**
+     * Get the pdf file path.
+     *
+     * @param {string} fileName
+     *
+     * @return {string}
+     */
+    getPdfFile(fileName) {
+        return this.output + path.parse(fileName).name + '.pdf';
+    }
+
+    /**
+     * Convert ppt files to pdf files.
+     */
+    convertPptToPdf() {
+        this.files.forEach((file, index) => {
+            console.log({
+                file: file.path,
+                path: this.getExecPath(file.path)
+            });
+            const fileName = getFileName(file.path);
+
+            exec(this.getExecPath(file.path), this.convertedToPdf.bind(this, index, file, fileName));
+        });
+    }
+
+    /**
+     * Convert PDF to Image.
+     *
+     * @param {int} index
+     * @param {object} file
+     * @param {string} fileName
+     * @param {object} error
+     * @param {object} result
+     */
+    convertedToPdf(index, file, fileName, error, result) {
+        makeFileWritable(file.path);
+        console.log({
+            index,
+            fileName,
+            error,
+            result,
+            pdf: this.getPdfFile(fileName)
+        });
     }
 
     /**

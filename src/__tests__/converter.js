@@ -1,4 +1,7 @@
 import Converter from '../converter.js';
+import {
+    fileExists
+} from '../fs.js';
 
 describe('PPT-PNG converter test', () => {
     it('It should generate the converter', () => {
@@ -9,6 +12,17 @@ describe('PPT-PNG converter test', () => {
 
         expect(converter.files[0].path).toBe('test/OPW 733 Tienduizend redenen.ppt');
         expect(converter.files.length).toBe(1);
+    });
+
+    it('It should generate the converter', () => {
+        const converter = Converter.create({
+            files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+            output: 'output/'
+        });
+
+        converter.convertPptToPdf();
+
+        expect(fileExists('output/OPW 733 Tienduizend redenen.pdf')).toBe(true);
     });
 
     it('It should throw an error if the files isnt an array', () => {

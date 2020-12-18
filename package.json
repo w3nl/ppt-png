@@ -70,7 +70,8 @@
     "dependencies": {
         "array-helpers": "^2.3.0",
         "glob": "^7.1.5",
-        "jimp": "^0.16.1"
+        "jimp": "^0.16.1",
+        "path": "^0.12.7"
     },
     "type": "module",
     "engines": {
