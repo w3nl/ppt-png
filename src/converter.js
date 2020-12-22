@@ -77,17 +77,20 @@ class Converter {
 
     /**
      * Convert ppt files to pdf files.
+     *
+     * @return {array}
      */
     convertPptToPdf() {
-        this.files.forEach((file) => {
+        return this.files.map((file) => {
             const fileName = getFileName(file.path);
             const output = execSync(this.getExecPath(file.path));
 
-            console.log({
+            return {
+                file,
                 fileName,
-                size: output.length,
-                pdf:  this.getPdfFile(fileName)
-            });
+                output,
+                pdf: this.getPdfFile(fileName)
+            };
         });
     }
 

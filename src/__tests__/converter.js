@@ -20,8 +20,9 @@ describe('PPT-PNG converter test', () => {
             output: 'output/'
         });
 
-        converter.convertPptToPdf();
+        const result = converter.convertPptToPdf();
 
+        expect(result[0].pdf).toBe('output/OPW 733 Tienduizend redenen.pdf');
         expect(fileExists('output/OPW 733 Tienduizend redenen.pdf')).toBe(true);
     });
 

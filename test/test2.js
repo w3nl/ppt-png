@@ -10,8 +10,9 @@ const converter = Converter.create({
 });
 
 
-converter.convertPptToPdf();
+const result = converter.convertPptToPdf();
 
 console.log({
-    exists: fileExists('output/OPW 733 Tienduizend redenen.pdf')
+    exists: fileExists('output/OPW 733 Tienduizend redenen.pdf'),
+    result
 });
