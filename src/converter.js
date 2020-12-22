@@ -5,7 +5,7 @@ import {
     makeFileWritable
 } from './fs.js';
 import {
-    exec
+    execSync
 } from 'child_process';
 import path from 'path';
 
@@ -80,34 +80,16 @@ class Converter {
      * Convert ppt files to pdf files.
      */
     convertPptToPdf() {
-        this.files.forEach((file, index) => {
-            console.log({
-                file: file.path,
-                path: this.getExecPath(file.path)
-            });
+        this.files.forEach((file) => {
             const fileName = getFileName(file.path);
+            const output = execSync(this.getExecPath(file.path));
 
-            exec(this.getExecPath(file.path), this.convertedToPdf.bind(this, index, file, fileName));
-        });
-    }
-
-    /**
-     * Convert PDF to Image.
-     *
-     * @param {int} index
-     * @param {object} file
-     * @param {string} fileName
-     * @param {object} error
-     * @param {object} result
-     */
-    convertedToPdf(index, file, fileName, error, result) {
-        makeFileWritable(file.path);
-        console.log({
-            index,
-            fileName,
-            error,
-            result,
-            pdf: this.getPdfFile(fileName)
+            makeFileWritable(file.path);
+            console.log({
+                fileName,
+                size: output.length,
+                pdf:  this.getPdfFile(fileName)
+            });
         });
     }
 
@@ -132,4 +114,3 @@ class Converter {
 }
 
 export default Converter;
-
