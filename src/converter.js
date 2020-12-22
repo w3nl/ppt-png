@@ -1,8 +1,7 @@
 import File from './file.js';
 import {
     folderExists,
-    getFileName,
-    makeFileWritable
+    getFileName
 } from './fs.js';
 import {
     execSync
@@ -84,7 +83,6 @@ class Converter {
             const fileName = getFileName(file.path);
             const output = execSync(this.getExecPath(file.path));
 
-            makeFileWritable(file.path);
             console.log({
                 fileName,
                 size: output.length,
