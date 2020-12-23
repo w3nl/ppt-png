@@ -1,7 +1,7 @@
 import Converter from '../converter.js';
 import {
     fileExists
-} from '../fs.js';
+} from '@hckrnews/converter';
 
 describe('PPT-PNG converter test', () => {
     it('It should generate the converter', () => {
@@ -22,7 +22,7 @@ describe('PPT-PNG converter test', () => {
 
         const result = converter.convertPptToPdf();
 
-        expect(result[0].pdf).toBe('output/OPW 733 Tienduizend redenen.pdf');
+        expect(result[0].file.path).toBe('output/OPW 733 Tienduizend redenen.pdf');
         expect(fileExists('output/OPW 733 Tienduizend redenen.pdf')).toBe(true);
     });
 

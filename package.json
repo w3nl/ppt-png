@@ -51,8 +51,8 @@
     "scripts": {
         "build": "microbundle --target node",
         "dev": "microbundle --target node watch",
-        "lint": "eslint js/*.js --config .eslintrc",
-        "lint:fix": "eslint js/*.js --config .eslintrc --fix",
+        "lint": "eslint src/*.js --config .eslintrc",
+        "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "test": "jest",
         "test:watch": "jest src --watch",
         "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
@@ -63,11 +63,15 @@
         "babel-eslint": "^10.1.0",
         "babel-jest": "^26.6.3",
         "coveralls": "^3.1.0",
-        "eslint": "^7.15.0",
+        "eslint": "^7.16.0",
         "esm": "^3.2.25",
+        "jest": "^26.6.3",
         "microbundle": "^0.12.4"
     },
     "dependencies": {
+        "@hckrnews/converter": "^0.3.0",
+        "@hckrnews/pdf2png": "^0.2.0",
+        "@hckrnews/ppt2pdf": "^0.2.2",
         "array-helpers": "^2.3.0",
         "glob": "^7.1.5",
         "jimp": "^0.16.1",

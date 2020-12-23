@@ -1,13 +1,9 @@
-import File from './file.js';
+import PptToPdfConverter from '@hckrnews/ppt2pdf';
+import Pdf2PngConverter from '@hckrnews/pdf2png';
 import {
-    folderExists,
-    getFileName
-} from './fs.js';
-import {
-    execSync
-} from 'child_process';
-import path from 'path';
-
+    File,
+    folderExists
+} from '@hckrnews/converter';
 /**
  * Converter
  */
@@ -18,7 +14,6 @@ class Converter {
     constructor() {
         this.files = [];
         this.output = null;
-        this.pptToPdfConverter = 'libreoffice --headless --convert-to pdf --outdir';
     }
 
     /**
@@ -54,43 +49,24 @@ class Converter {
     }
 
     /**
-     * Get the exec path
-     *
-     * @param {string} filePath
-     *
-     * @return {string}
-     */
-    getExecPath(filePath) {
-        return this.pptToPdfConverter + ' \'' + this.output + '\' \'' + filePath + '\'';
-    }
-
-    /**
-     * Get the pdf file path.
-     *
-     * @param {string} fileName
-     *
-     * @return {string}
-     */
-    getPdfFile(fileName) {
-        return this.output + path.parse(fileName).name + '.pdf';
-    }
-
-    /**
      * Convert ppt files to pdf files.
      *
      * @return {array}
      */
     convertPptToPdf() {
         return this.files.map((file) => {
-            const fileName = getFileName(file.path);
-            const output = execSync(this.getExecPath(file.path));
+            const pptConverter = PptToPdfConverter.create({
+                file:   file.path,
+                output: this.output
+            });
 
-            return {
-                file,
-                fileName,
-                output,
-                pdf: this.getPdfFile(fileName)
-            };
+            pptConverter.convert();
+            const pdfConverter = Pdf2PngConverter.create({
+                file:   pptConverter.pdf,
+                output: this.output
+            });
+
+            return pdfConverter.convert();
         });
     }
 

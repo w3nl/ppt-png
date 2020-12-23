@@ -1,7 +1,7 @@
 import Converter from '../src/converter.js';
 import {
     fileExists
-} from '../src/fs.js';
+} from '@hckrnews/converter';
 
 
 const converter = Converter.create({
