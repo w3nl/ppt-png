@@ -322,11 +322,12 @@ function processOptions(receivedOptions) {
 
     if (receivedOptions.density) {
         options.density = positiveIntOrDefault(receivedOptions.density, 96);
-    } else if (receivedOptions.width || receivedOptions.height) {
-        options.width = positiveIntOrDefault(receivedOptions.width, '');
-        options.height = positiveIntOrDefault(receivedOptions.height, '');
     } else {
         options.density = 96;
+    }
+    if (receivedOptions.width || receivedOptions.height) {
+        options.width = positiveIntOrDefault(receivedOptions.width, '');
+        options.height = positiveIntOrDefault(receivedOptions.height, '');
     }
 
     // Its a jpg file
@@ -480,7 +481,8 @@ function createPagePromise(pageNum, pageIndex, totalPagesProcessed, totalPDFPage
 
         if (options.density) {
             convertOptions.push('-density ' + options.density);
-        } else {
+        }
+        if (options.width) {
             convertOptions.push('-resize ' + options.width + (options.height ? 'X' + options.height : ''));
         }
         if (options.quality) {
