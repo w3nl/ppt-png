@@ -29,36 +29,22 @@ Mac:
 ## Basic Usage
 
 ```
-new Converter({
-    files:    files,
-    output:   'output/',
-    invert:   true,
-    callback: function(data) {
-        console.log(data.failed, data.success, data.files, data.time);
-    }
-}).run();
-```
-
-## Promise based
-
-```
-new Converter({
-    files:         files,
-    output:        'output/',
-    invert:        true,
-    deletePdfFile: true,
-    outputType:    'png',
-    logLevel:      2
-}).wait().then(function(data) {
-    console.log(data.failed, data.success, data.files, data.time);
+const converter = Converter.create({
+    files:  ['test/OPW 733 Tienduizend redenen.ppt'],
+    output: 'output/'
 });
+
+
+const result = converter.convert();
 ```
+
 
 
 files: Array with the files.
 
 output: Output folder.
 
+### Todo:
 invert: Invert the colors, default is `false`;
 
 greyscale: Greyscale the colors, default is `false`;
@@ -76,27 +62,6 @@ width: Width of the output images if density is not used
 height: Height of the output images if density is not used
 
 logLevel: Set the log level, default is `1`.
-
-callback: Function calls when the script is ready.
-
-The function and promise send an object to the first parameter.
-
-```
-{
-    failed: [],
-    success: [],
-    files: [],
-    time: 0
-}
-```
-
-failed: An array with objects for failed converting files (file, failure, error)
-
-success: An array with objects for converted files (page, index, name, path).
-
-files: An array with files send to the script.
-
-time: The total time the script was running.
 
 
 ## Test the package.

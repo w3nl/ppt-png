@@ -2,18 +2,18 @@ import PptToPdfConverter from '@hckrnews/ppt2pdf';
 import Pdf2PngConverter from '@hckrnews/pdf2png';
 import {
     File,
-    folderExists
+    Converter
 } from '@hckrnews/converter';
 /**
  * Converter
  */
-class Converter {
+class Ppt2PngConverter extends Converter {
     /**
      * Define the files array
      */
     constructor() {
+        super();
         this.files = [];
-        this.output = null;
     }
 
     /**
@@ -32,28 +32,11 @@ class Converter {
     }
 
     /**
-     * Set the output path
-     *
-     * @param {string} output
-     */
-    setOutput(output) {
-        if (!output || output.constructor !== String) {
-            throw new Error('Output should be a string');
-        }
-
-        if (!folderExists(output)) {
-            throw new Error('Output folder doesnt exists');
-        }
-
-        this.output = output;
-    }
-
-    /**
      * Convert ppt files to pdf files.
      *
      * @return {array}
      */
-    convertPptToPdf() {
+    convert() {
         return this.files.map((file) => {
             const pptConverter = PptToPdfConverter.create({
                 file:   file.path,
@@ -81,7 +64,7 @@ class Converter {
         files,
         output
     }) {
-        const converter = new Converter();
+        const converter = new Ppt2PngConverter();
 
         converter.setFiles(files);
         converter.setOutput(output);
@@ -90,4 +73,4 @@ class Converter {
     }
 }
 
-export default Converter;
+export default Ppt2PngConverter;
