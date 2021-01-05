@@ -20,7 +20,7 @@ describe('PPT-PNG converter test', () => {
             output: 'output/'
         });
 
-        const result = converter.convertPptToPdf();
+        const result = converter.convert();
 
         expect(result[0].file.path).toBe('output/OPW 733 Tienduizend redenen.pdf');
         expect(fileExists('output/OPW 733 Tienduizend redenen.pdf')).toBe(true);
