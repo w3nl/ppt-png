@@ -1,7 +1,7 @@
 {
     "extends": "eslint:recommended",
     "env": { "es6": true, "node": true, "jquery": true, "browser": true },
-    "globals": { "Modernizr": false, "W2Form": false },
+    "globals": { "Modernizr": false, "W2Form": false, "describe": false, "it": false , "expect": false, "exec": false},
     "rules":
         {
             "no-console": "warn",

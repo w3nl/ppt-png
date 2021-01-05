@@ -52,7 +52,7 @@ class Converter {
         } else {
             this.documentConvert = 'libreoffice --headless --convert-to pdf --outdir';
         }
-        this.version = '0.7.3';
+        this.version = '0.8.0';
     }
 
     /**

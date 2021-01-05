@@ -2,6 +2,10 @@
 =====
 * Made it possible to add density and width and height
 
+0.8.0 2020-12-18
+=====
+* Refactor so the code is more testable and readable
+
 0.7.2 2020-12-18
 =====
 * Fix the density

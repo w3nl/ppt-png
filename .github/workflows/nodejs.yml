@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -17,9 +17,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, lint and test
+    - name: Install LibreOffice
+      run: sudo apt install libreoffice
+    - name: Install imagemagick
+      run: sudo apt install imagemagick ghostscript
+    - name: Change ImageMagick policy to allow pdf->png conversion.
+      run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
+    - name: npm install, build, and test
       run: |
-        npm install
+        npm ci
         npm run lint
+        npm test
+        npm run build --if-present
       env:
         CI: true
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
