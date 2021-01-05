@@ -66,13 +66,13 @@
         "eslint": "^7.17.0",
         "esm": "^3.2.25",
         "jest": "^26.6.3",
-        "microbundle": "^0.12.4"
+        "microbundle": "^0.13.0"
     },
     "dependencies": {
         "@hckrnews/converter": "^0.4.0",
         "@hckrnews/pdf2png": "^0.2.0",
         "@hckrnews/ppt2pdf": "^0.2.2",
-        "array-helpers": "^2.3.0",
+        "array-helpers": "^4.0.1",
         "glob": "^7.1.5",
         "jimp": "^0.16.1",
         "path": "^0.12.7"
