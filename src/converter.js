@@ -1,5 +1,5 @@
-import PptToPdfConverter from '@hckrnews/ppt2pdf';
-import Pdf2PngConverter from '@hckrnews/pdf2png';
+import pdf2png from './pdf2png.js';
+import ppt2pdf from './ppt2pdf.js';
 import {
     File,
     Converter
@@ -38,18 +38,15 @@ class Ppt2PngConverter extends Converter {
      */
     convert() {
         return this.files.map((file) => {
-            const pptConverter = PptToPdfConverter.create({
-                file:   file.path,
+            const pdf = ppt2pdf({
+                file,
                 output: this.output
             });
 
-            pptConverter.convert();
-            const pdfConverter = Pdf2PngConverter.create({
-                file:   pptConverter.pdf,
+            return pdf2png({
+                file:   pdf,
                 output: this.output
             });
-
-            return pdfConverter.convert();
         });
     }
 
