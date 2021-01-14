@@ -24,8 +24,14 @@
     "exports": {
         ".": {
             "require": "./dist/converter.js",
+            "import": "./dist/converter.module.js",
             "default": "./dist/converter.module.js"
-        }
+        },
+        "./source": "./src/converter.js",
+        "./main": "./dist/converter.js",
+        "./module": "./dist/converter.module.js",
+        "./modern": "./dist/converter.modern.js",
+        "./umd": "./dist/converter.umd.js"
     },
     "repository": {
         "type": "git",
