@@ -71,3 +71,8 @@ class Ppt2PngConverter extends Converter {
 }
 
 export default Ppt2PngConverter;
+export {
+    Ppt2PngConverter,
+    pdf2png,
+    ppt2pdf
+};
