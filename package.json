@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "src/converter.js",
@@ -12,18 +12,18 @@
         "dist/converter.module.mjs.map",
         "dist/converter.modern.mjs",
         "dist/converter.modern.mjs.map",
-        "dist/converter.umd.js",
-        "dist/converter.umd.js.map"
+        "dist/converter.umd.cjs",
+        "dist/converter.umd.cjs.map"
     ],
     "source": "src/converter.js",
     "main": "dist/converter.js",
     "module": "dist/converter.module.mjs",
     "esmodule": "dist/converter.modern.mjs",
-    "unpkg": "dist/converter.umd.js",
-    "umd:main": "dist/converter.umd.js",
+    "unpkg": "dist/converter.umd.cjs",
+    "umd:main": "dist/converter.umd.cjs",
     "exports": {
         ".": {
-            "require": "./dist/converter.umd.js",
+            "require": "./dist/converter.umd.cjs",
             "import": "./dist/converter.module.mjs",
             "default": "./dist/converter.js"
         },
@@ -31,7 +31,7 @@
         "./main": "./dist/converter.js",
         "./module": "./dist/converter.module.mjs",
         "./modern": "./dist/converter.modern.mjs",
-        "./umd": "./dist/converter.umd.js"
+        "./umd": "./dist/converter.umd.cjs"
     },
     "repository": {
         "type": "git",
