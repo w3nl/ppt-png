@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "src/converter.js",
@@ -8,30 +8,30 @@
         "src/ppt2pdf.js",
         "dist/converter.js",
         "dist/converter.js.map",
-        "dist/converter.module.js",
-        "dist/converter.module.js.map",
-        "dist/converter.modern.js",
-        "dist/converter.modern.js.map",
-        "dist/converter.umd.cjs",
-        "dist/converter.umd.cjs.map"
+        "dist/converter.module.mjs",
+        "dist/converter.module.mjs.map",
+        "dist/converter.modern.mjs",
+        "dist/converter.modern.mjs.map",
+        "dist/converter.umd.js",
+        "dist/converter.umd.js.map"
     ],
     "source": "src/converter.js",
     "main": "dist/converter.js",
-    "module": "dist/converter.module.js",
-    "esmodule": "dist/converter.modern.js",
-    "unpkg": "dist/converter.umd.cjs",
-    "umd:main": "dist/converter.umd.cjs",
+    "module": "dist/converter.module.mjs",
+    "esmodule": "dist/converter.modern.mjs",
+    "unpkg": "dist/converter.umd.js",
+    "umd:main": "dist/converter.umd.js",
     "exports": {
         ".": {
-            "require": "./dist/converter.umd.cjs",
-            "import": "./dist/converter.module.js",
-            "default": "./dist/converter.module.js"
+            "require": "./dist/converter.umd.js",
+            "import": "./dist/converter.module.mjs",
+            "default": "./dist/converter.js"
         },
         "./source": "./src/converter.js",
         "./main": "./dist/converter.js",
-        "./module": "./dist/converter.module.js",
-        "./modern": "./dist/converter.modern.js",
-        "./umd": "./dist/converter.umd.cjs"
+        "./module": "./dist/converter.module.mjs",
+        "./modern": "./dist/converter.modern.mjs",
+        "./umd": "./dist/converter.umd.js"
     },
     "repository": {
         "type": "git",
@@ -80,7 +80,6 @@
         "@hckrnews/pdf2png": "^0.2.2",
         "@hckrnews/ppt2pdf": "^0.2.3"
     },
-    "type": "module",
     "engines": {
         "node": ">= 14"
     }
