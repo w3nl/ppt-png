@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "src/converter.js",
@@ -76,9 +76,9 @@
         "microbundle": "^0.13.0"
     },
     "dependencies": {
-        "@hckrnews/converter": "^0.4.0",
-        "@hckrnews/pdf2png": "^0.2.2",
-        "@hckrnews/ppt2pdf": "^0.2.3"
+        "@hckrnews/converter": "^0.4.1",
+        "@hckrnews/pdf2png": "^0.2.4",
+        "@hckrnews/ppt2pdf": "^0.2.5"
     },
     "engines": {
         "node": ">= 14"
