@@ -15,30 +15,31 @@ The package requires the following software to be installed:
 
 ## Installation
 
-    npm install ppt-png
+Minimum node version: `14`
+
+    `npm install ppt-png`
 
 Debian/Ubuntu:
 
-    sudo apt install libreoffice-dev imagemagick poppler-utils
+    `sudo apt install libreoffice-dev imagemagick poppler-utils`
 
 Mac:
 
-    brew install imagemagick poppler ghostscript
+    `brew install imagemagick poppler ghostscript`
 
 
-## Basic Usage
+## Basic Usage (node.js 14)
 
 ```
+import Converter from 'ppt-png'
+
 const converter = Converter.create({
     files:  ['test/OPW 733 Tienduizend redenen.ppt'],
     output: 'output/'
 });
 
-
 const result = converter.convert();
 ```
-
-
 
 files: Array with the files.
 
