@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "1.1.9",
+    "version": "1.1.10",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "src/converter.js",
@@ -68,12 +68,12 @@
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
         "babel-eslint": "^10.1.0",
-        "babel-jest": "^26.6.3",
+        "babel-jest": "^27.5.1",
         "coveralls": "^3.1.0",
-        "eslint": "^7.17.0",
+        "eslint": "^8.10.0",
         "esm": "^3.2.25",
-        "jest": "^26.6.3",
-        "microbundle": "^0.13.0"
+        "jest": "^27.5.1",
+        "microbundle": "^0.14.2"
     },
     "dependencies": {
         "@hckrnews/converter": "^0.4.1",
