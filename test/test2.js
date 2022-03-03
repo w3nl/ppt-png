@@ -1,10 +1,12 @@
-import Converter from '../src/converter.js';
-import {
+var {
+    Ppt2PngConverter
+} = require('../dist/converter.js');
+var {
     fileExists
-} from '@hckrnews/converter';
+} = require('@hckrnews/converter');
 
 
-const converter = Converter.create({
+const converter = Ppt2PngConverter.create({
     files:  ['test/OPW 733 Tienduizend redenen.ppt'],
     output: 'output/'
 });
