@@ -1,0 +1,38 @@
+{
+    "all": true,
+    "include": [
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "**/*.test.js"
+    ],
+    "reporter": [
+        "text",
+        "text-summary",
+        "lcov",
+        "clover"
+    ],
+    "check-coverage": true,
+    "watermarks": {
+        "lines": [
+            70,
+            90
+        ],
+        "functions": [
+            70,
+            90
+        ],
+        "branches": [
+            70,
+            90
+        ],
+        "statements": [
+            70,
+            90
+        ]
+    },
+    "branches": 70,
+    "lines": 90,
+    "functions": 90,
+    "statements": 90
+}

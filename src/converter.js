@@ -1,9 +1,6 @@
+import { File, Converter } from '@hckrnews/converter';
 import pdf2png from './pdf2png.js';
 import ppt2pdf from './ppt2pdf.js';
-import {
-    File,
-    Converter
-} from '@hckrnews/converter';
 /**
  * Converter
  */
@@ -26,9 +23,11 @@ class Ppt2PngConverter extends Converter {
             throw new Error('Files should be a array');
         }
 
-        this.files = files.map((file) => File.create({
-            filePath: file
-        }));
+        this.files = files.map((file) =>
+            File.create({
+                filePath: file,
+            })
+        );
     }
 
     /**
@@ -40,12 +39,12 @@ class Ppt2PngConverter extends Converter {
         return this.files.map((file) => {
             const pdf = ppt2pdf({
                 file,
-                output: this.output
+                output: this.output,
             });
 
             return pdf2png({
-                file:   pdf,
-                output: this.output
+                file: pdf,
+                output: this.output,
             });
         });
     }
@@ -57,10 +56,7 @@ class Ppt2PngConverter extends Converter {
      *
      * @return {object}
      */
-    static create({
-        files,
-        output
-    }) {
+    static create({ files, output }) {
         const converter = new Ppt2PngConverter();
 
         converter.setFiles(files);
@@ -71,8 +67,4 @@ class Ppt2PngConverter extends Converter {
 }
 
 export default Ppt2PngConverter;
-export {
-    Ppt2PngConverter,
-    pdf2png,
-    ppt2pdf
-};
+export { Ppt2PngConverter, pdf2png, ppt2pdf };

@@ -1,11 +1,9 @@
 import Pdf2PngConverter from '@hckrnews/pdf2png';
 
-export default ({
-    file, output
-}) => {
+export default ({ file, output }) => {
     const pdfConverter = Pdf2PngConverter.create({
         file,
-        output
+        output,
     });
 
     return pdfConverter.convert();
