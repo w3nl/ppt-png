@@ -1,7 +1,7 @@
-var {
+import {
     Ppt2PngConverter
-} = require('../dist/converter.js');
-var glob = require('glob');
+} from '../src/converter.js';
+import glob from 'glob';
 
 // options is optional
 glob('test/*.ppt*', {}, function(error, files) {

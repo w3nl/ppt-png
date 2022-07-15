@@ -1,9 +1,9 @@
-var {
+import {
     Ppt2PngConverter
-} = require('../dist/converter.js');
-var {
+} from '../src/converter.js';
+import {
     fileExists
-} = require('@hckrnews/converter');
+} from '@hckrnews/converter';
 
 
 const converter = Ppt2PngConverter.create({

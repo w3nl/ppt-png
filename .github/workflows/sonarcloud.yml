@@ -1,4 +1,4 @@
-name: Node CI
+name: SonarCloud
 
 on: [push]
 
@@ -7,31 +7,28 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 17.x]
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
+    - uses: actions/checkout@v2
+    - name: Use Node.js 18
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18
+        cache: 'npm'
     - name: Install LibreOffice
       run: sudo apt install libreoffice
     - name: Install imagemagick
       run: sudo apt install imagemagick ghostscript
     - name: Change ImageMagick policy to allow pdf->png conversion.
       run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
-    - name: npm install, build, and test
+    - name: npm install, lint, and test
       run: |
         npm ci
-        npm run lint
+        npm run lint:report
         npm test
-        npm run build --if-present
       env:
         CI: true
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

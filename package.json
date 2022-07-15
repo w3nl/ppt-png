@@ -1,38 +1,14 @@
 {
     "name": "ppt-png",
-    "version": "1.1.10",
+    "version": "2.0.0",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "src/converter.js",
         "src/pdf2png.js",
-        "src/ppt2pdf.js",
-        "dist/converter.js",
-        "dist/converter.js.map",
-        "dist/converter.module.mjs",
-        "dist/converter.module.mjs.map",
-        "dist/converter.modern.mjs",
-        "dist/converter.modern.mjs.map",
-        "dist/converter.umd.cjs",
-        "dist/converter.umd.cjs.map"
+        "src/ppt2pdf.js"
     ],
     "source": "src/converter.js",
-    "main": "dist/converter.js",
-    "module": "dist/converter.module.mjs",
-    "esmodule": "dist/converter.modern.mjs",
-    "unpkg": "dist/converter.umd.cjs",
-    "umd:main": "dist/converter.umd.cjs",
-    "exports": {
-        ".": {
-            "require": "./dist/converter.umd.cjs",
-            "import": "./dist/converter.module.mjs",
-            "default": "./dist/converter.js"
-        },
-        "./source": "./src/converter.js",
-        "./main": "./dist/converter.js",
-        "./module": "./dist/converter.module.mjs",
-        "./modern": "./dist/converter.modern.mjs",
-        "./umd": "./dist/converter.umd.cjs"
-    },
+    "main": "src/converter.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/w3nl/ppt-png.git"
@@ -56,31 +32,37 @@
     "license": "MIT",
     "homepage": "https://github.com/w3nl/ppt-png#readme",
     "scripts": {
-        "build": "microbundle --target node",
-        "dev": "microbundle --target node watch",
         "lint": "eslint src/*.js --config .eslintrc",
+        "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
-        "test": "jest",
-        "test:watch": "jest src --watch",
-        "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+        "test": "c8 node --test src/__tests__/converter.test.js",
+        "cpd": "node_modules/jscpd/bin/jscpd src",
+        "vulnerabilities": "npm audit --production"
     },
     "devDependencies": {
-        "@babel/core": "^7.12.10",
-        "@babel/preset-env": "^7.12.11",
-        "babel-eslint": "^10.1.0",
-        "babel-jest": "^27.5.1",
-        "coveralls": "^3.1.0",
-        "eslint": "^8.10.0",
+        "@hckrnews/eslint-config": "^3.0.0",
+        "c8": "^7.11.3",
+        "eslint": "^8.15.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-html": "^6.1.2",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-prettier": "^4.0.0",
         "esm": "^3.2.25",
-        "jest": "^27.5.1",
-        "microbundle": "^0.14.2"
+        "jscpd": "^3.4.5"
     },
     "dependencies": {
-        "@hckrnews/converter": "^0.4.1",
-        "@hckrnews/pdf2png": "^0.2.4",
-        "@hckrnews/ppt2pdf": "^0.2.5"
+        "@hckrnews/converter": "^0.5.0",
+        "@hckrnews/pdf2png": "^0.3.0",
+        "@hckrnews/ppt2pdf": "^0.3.0"
     },
     "engines": {
         "node": ">= 14"
+    },
+    "type": "module",
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/w3nl"
     }
 }

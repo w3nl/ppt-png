@@ -1,11 +1,9 @@
 import PptToPdfConverter from '@hckrnews/ppt2pdf';
 
-export default ({
-    file, output
-}) => {
+export default ({ file, output }) => {
     const pptConverter = PptToPdfConverter.create({
         file: file.path,
-        output
+        output,
     });
 
     pptConverter.convert();
