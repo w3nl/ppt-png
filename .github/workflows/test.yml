@@ -18,6 +18,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Update APT
+      run: sudo apt update
     - name: Install LibreOffice
       run: sudo apt install libreoffice
     - name: Install imagemagick
