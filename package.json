@@ -53,9 +53,9 @@
         "jscpd": "^4.0.0"
     },
     "dependencies": {
-        "@hckrnews/converter": "^0.5.0",
-        "@hckrnews/pdf2png": "^0.3.0",
-        "@hckrnews/ppt2pdf": "^0.3.0"
+        "@hckrnews/converter": "^0.5.2",
+        "@hckrnews/pdf2png": "^0.3.4",
+        "@hckrnews/ppt2pdf": "^0.3.4"
     },
     "engines": {
         "node": ">= 18"
