@@ -45,6 +45,8 @@ class Ppt2PngConverter extends Converter {
             return pdf2png({
                 file: pdf,
                 output: this.output,
+                density: this.density,
+                quality: this.quality
             });
         });
     }
@@ -53,14 +55,19 @@ class Ppt2PngConverter extends Converter {
      * Create the converter
      *
      * @param {array} files
+     * @param {string} output
+     * @param {object} options
      *
      * @return {object}
      */
-    static create({ files, output }) {
+    static create({ files, output, options }) {
         const converter = new Ppt2PngConverter();
 
         converter.setFiles(files);
         converter.setOutput(output);
+
+        converter.density = (options && options.density) || undefined;
+        converter.quality = (options && options.quality) || undefined;
 
         return converter;
     }

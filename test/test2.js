@@ -8,7 +8,9 @@ import {
 
 const converter = Ppt2PngConverter.create({
     files:  ['test/OPW 733 Tienduizend redenen.ppt'],
-    output: 'output/'
+    output: 'output/',
+    density:         300,
+    quality:         100,
 });
 
 
