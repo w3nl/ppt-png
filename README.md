@@ -15,7 +15,7 @@ The package requires the following software to be installed:
 
 ## Installation
 
-Minimum node version: `14`
+Minimum node version: `18`
 
     `npm install ppt-png`
 
@@ -28,7 +28,7 @@ Mac:
     `brew install imagemagick poppler ghostscript`
 
 
-## Basic Usage (node.js 14)
+## Basic Usage (node.js)
 
 ```
 import Converter from 'ppt-png'
