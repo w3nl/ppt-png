@@ -46,7 +46,7 @@ class Ppt2PngConverter extends Converter {
                 file: pdf,
                 output: this.output,
                 density: this.density,
-                quality: this.quality
+                quality: this.quality,
             });
         });
     }
