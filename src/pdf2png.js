@@ -5,7 +5,7 @@ export default ({ file, output, density, quality }) => {
         file,
         output,
         density,
-        quality
+        quality,
     });
 
     return pdfConverter.convert();

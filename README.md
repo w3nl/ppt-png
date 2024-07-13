@@ -1,7 +1,7 @@
 # ppt-png
 Convert ppt to image (png,jpg).
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-stats] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-stats] [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=bugs)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=coverage)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png)
 
 If you want convert powerpoint files to png or jpg images, you can do it with this script.
 
@@ -15,7 +15,7 @@ The package requires the following software to be installed:
 
 ## Installation
 
-Minimum node version: `14`
+Minimum node version: `18`
 
     `npm install ppt-png`
 
@@ -28,7 +28,7 @@ Mac:
     `brew install imagemagick poppler ghostscript`
 
 
-## Basic Usage (node.js 14)
+## Basic Usage (node.js)
 
 ```
 import Converter from 'ppt-png'
