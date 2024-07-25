@@ -23,8 +23,8 @@ test('PPT-PNG converter test', async (t) => {
             output: 'output/',
             options: {
                 density: 300,
-                quality: 100
-            }
+                quality: 100,
+            },
         });
 
         const result = converter.convert();
@@ -33,6 +33,8 @@ test('PPT-PNG converter test', async (t) => {
             result[0].file.path,
             'output/OPW 733 Tienduizend redenen.pdf'
         );
+        assert.strictEqual(converter.density, 300);
+        assert.strictEqual(converter.quality, 100);
         assert.strictEqual(
             fileExists('output/OPW 733 Tienduizend redenen.pdf'),
             true
