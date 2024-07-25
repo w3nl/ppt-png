@@ -2,8 +2,12 @@ import { File, Converter } from '@hckrnews/converter';
 import pdf2png from './pdf2png.js';
 import ppt2pdf from './ppt2pdf.js';
 /**
- * Converter
+ * @typedef {import('./pdf2png.js').Converter} Converter
+ * @typedef {object} Options
+ * @property {number=} quality
+ * @property {number=} density
  */
+
 class Ppt2PngConverter extends Converter {
     /**
      * Define the files array
@@ -15,8 +19,7 @@ class Ppt2PngConverter extends Converter {
 
     /**
      * Set the files
-     *
-     * @param {array} files
+     * @param {Array} files
      */
     setFiles(files) {
         if (!files || files.constructor !== Array) {
@@ -32,8 +35,7 @@ class Ppt2PngConverter extends Converter {
 
     /**
      * Convert ppt files to pdf files.
-     *
-     * @return {array}
+     * @returns {Converter[]}
      */
     convert() {
         return this.files.map((file) => {
@@ -53,12 +55,11 @@ class Ppt2PngConverter extends Converter {
 
     /**
      * Create the converter
-     *
-     * @param {array} files
-     * @param {string} output
-     * @param {object} options
-     *
-     * @return {object}
+     * @param {object} params
+     * @param {Array} params.files
+     * @param {string} params.output
+     * @param {Options} params.options
+     * @returns {object}
      */
     static create({ files, output, options }) {
         const converter = new Ppt2PngConverter();

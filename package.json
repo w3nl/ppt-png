@@ -1,6 +1,6 @@
 {
     "name": "ppt-png",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "Convert ppt to image (png,jpg)",
     "files": [
         "src/converter.js",
@@ -47,7 +47,9 @@
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-html": "^8.0.0",
         "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsdoc": "^48.7.0",
         "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-n": "^17.9.0",
         "eslint-plugin-prettier": "^5.0.0",
         "esm": "^3.2.25",
         "jscpd": "^4.0.0"

@@ -21,6 +21,10 @@ test('PPT-PNG converter test', async (t) => {
         const converter = Converter.create({
             files: ['test/OPW 733 Tienduizend redenen.ppt'],
             output: 'output/',
+            options: {
+                density: 300,
+                quality: 100
+            }
         });
 
         const result = converter.convert();
