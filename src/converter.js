@@ -15,6 +15,8 @@ class Ppt2PngConverter extends Converter {
     constructor() {
         super();
         this.files = [];
+        this.density = null;
+        this.quality = null;
     }
 
     /**
@@ -67,8 +69,8 @@ class Ppt2PngConverter extends Converter {
         converter.setFiles(files);
         converter.setOutput(output);
 
-        converter.density = (options && options.density) || undefined;
-        converter.quality = (options && options.quality) || undefined;
+        converter.density = options?.density;
+        converter.quality = options?.quality;
 
         return converter;
     }
