@@ -42,7 +42,7 @@
     "devDependencies": {
         "@hckrnews/eslint-config": "^3.0.0",
         "c8": "^10.0.0",
-        "eslint": "^8.15.0",
+        "eslint": "^9.15.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-html": "^8.0.0",
