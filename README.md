@@ -1,4 +1,5 @@
 # ppt-png
+
 Convert ppt to image (png,jpg).
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-stats] [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=bugs)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=w3nl_ppt-png&metric=coverage)](https://sonarcloud.io/summary/new_code?id=w3nl_ppt-png)
@@ -9,9 +10,9 @@ If you want convert powerpoint files to png or jpg images, you can do it with th
 
 The package requires the following software to be installed:
 
-* LibreOffice-dev
-* ImageMagick
-* pdfinfo
+-   LibreOffice-dev
+-   ImageMagick
+-   pdfinfo
 
 ## Installation
 
@@ -26,7 +27,6 @@ Debian/Ubuntu:
 Mac:
 
     `brew install imagemagick poppler ghostscript`
-
 
 ## Basic Usage (node.js)
 
@@ -45,7 +45,20 @@ files: Array with the files.
 
 output: Output folder.
 
+## ImageMagick settings
+
+Image Magick can crash with segmentation fault (core dumped) or other errors. If you have more memory available, you can increase the memory default limits.
+
+```Dockerfile
+# Configure ImageMagick for PDF conversion with increased memory limits
+RUN if [ -f /etc/ImageMagick-6/policy.xml ]; then \
+  sed -i 's/<policy domain="resource" name="memory" value="256MiB"\/>/<policy domain="resource" name="memory" value="2GiB"\/>/g' /etc/ImageMagick-6/policy.xml && \
+  sed -i 's/<policy domain="resource" name="disk" value="1GiB"\/>/<policy domain="resource" name="disk" value="4GiB"\/>/g' /etc/ImageMagick-6/policy.xml; \
+  fi
+```
+
 ### Todo:
+
 invert: Invert the colors, default is `false`;
 
 greyscale: Greyscale the colors, default is `false`;
@@ -64,7 +77,6 @@ height: Height of the output images if density is not used
 
 logLevel: Set the log level, default is `1`.
 
-
 ## Test the package.
 
 ```
@@ -78,7 +90,6 @@ If you only want to check the eslint rules, just run.
 ```
 npm run lint
 ```
-
 
 [downloads-image]: https://img.shields.io/npm/dm/ppt-png.svg
 [npm-url]: https://www.npmjs.com/package/ppt-png
