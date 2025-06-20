@@ -56,7 +56,7 @@
     },
     "dependencies": {
         "@hckrnews/converter": "^0.5.2",
-        "@hckrnews/pdf2png": "^0.3.4",
+        "@hckrnews/pdf2png": "^0.4.0",
         "@hckrnews/ppt2pdf": "^0.3.4"
     },
     "engines": {
