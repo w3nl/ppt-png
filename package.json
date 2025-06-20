@@ -32,35 +32,27 @@
     "license": "MIT",
     "homepage": "https://github.com/w3nl/ppt-png#readme",
     "scripts": {
-        "lint": "eslint src/*.js --config .eslintrc",
-        "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
-        "lint:fix": "eslint src/*.js --config .eslintrc --fix",
-        "test": "c8 node --test src/__tests__/converter.test.js",
+        "lint": "eslint",
+        "lint:report": "eslint -f json -o report.json",
+        "lint:fix": "eslint --fix",
+        "test": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --production"
     },
     "devDependencies": {
-        "@hckrnews/eslint-config": "^3.0.0",
-        "c8": "^10.0.0",
-        "eslint": "^8.15.0",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-config-prettier": "^9.0.0",
-        "eslint-plugin-html": "^8.0.0",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-jsdoc": "^51.0.0",
-        "eslint-plugin-jsx-a11y": "^6.5.1",
-        "eslint-plugin-n": "^17.9.0",
-        "eslint-plugin-prettier": "^5.2.6",
+        "@trojs/lint": "^0.3.1",
+        "eslint": "^9.29.0",
         "esm": "^3.2.25",
+        "globals": "^16.2.0",
         "jscpd": "^4.0.0"
     },
     "dependencies": {
         "@hckrnews/converter": "^0.6.0",
         "@hckrnews/pdf2png": "^0.4.0",
-        "@hckrnews/ppt2pdf": "^0.3.4"
+        "@hckrnews/ppt2pdf": "^0.4.0"
     },
     "engines": {
-        "node": ">= 18"
+        "node": ">= 20"
     },
     "type": "module",
     "funding": {
