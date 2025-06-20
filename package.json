@@ -55,7 +55,7 @@
         "jscpd": "^4.0.0"
     },
     "dependencies": {
-        "@hckrnews/converter": "^0.5.2",
+        "@hckrnews/converter": "^0.6.0",
         "@hckrnews/pdf2png": "^0.4.0",
         "@hckrnews/ppt2pdf": "^0.3.4"
     },
