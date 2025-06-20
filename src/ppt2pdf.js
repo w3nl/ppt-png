@@ -1,12 +1,12 @@
-import PptToPdfConverter from '@hckrnews/ppt2pdf';
+import PptToPdfConverter from '@hckrnews/ppt2pdf'
 
 export default ({ file, output }) => {
-    const pptConverter = PptToPdfConverter.create({
-        file: file.path,
-        output,
-    });
+  const pptConverter = PptToPdfConverter.create({
+    file: file.path,
+    output
+  })
 
-    pptConverter.convert();
+  pptConverter.convert()
 
-    return pptConverter.pdf;
-};
+  return pptConverter.pdf
+}

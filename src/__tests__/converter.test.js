@@ -1,98 +1,100 @@
-import test from 'node:test';
-import assert from 'node:assert';
-import { fileExists } from '@hckrnews/converter';
-import Converter from '../converter.js';
+/* eslint-disable sonarjs/no-duplicate-string */
+
+import test from 'node:test'
+import assert from 'node:assert'
+import { fileExists } from '@hckrnews/converter'
+import Converter from '../converter.js'
 
 test('PPT-PNG converter test', async (t) => {
-    await t.test('It should generate the converter', () => {
-        const converter = Converter.create({
-            files: ['test/OPW 733 Tienduizend redenen.ppt'],
-            output: 'output/',
-        });
+  await t.test('It should generate the converter', () => {
+    const converter = Converter.create({
+      files: ['test/OPW 733 Tienduizend redenen.ppt'],
+      output: 'output/'
+    })
 
+    assert.strictEqual(
+      converter.files[0].path,
+      'test/OPW 733 Tienduizend redenen.ppt'
+    )
+    assert.strictEqual(converter.files.length, 1)
+  })
+
+  await t.test('It should generate the converter', () => {
+    const converter = Converter.create({
+      files: ['test/OPW 733 Tienduizend redenen.ppt'],
+      output: 'output/',
+      options: {
+        density: 300,
+        quality: 100
+      }
+    })
+
+    const result = converter.convert()
+
+    assert.strictEqual(
+      result[0].file.path,
+      'output/OPW 733 Tienduizend redenen.pdf'
+    )
+    assert.strictEqual(converter.density, 300)
+    assert.strictEqual(converter.quality, 100)
+    assert.strictEqual(
+      fileExists('output/OPW 733 Tienduizend redenen.pdf'),
+      true
+    )
+  })
+
+  await t.test('It should throw an error if the files isnt an array', () => {
+    try {
+      Converter.create({
+        files: 42
+      })
+    } catch (error) {
+      assert.strictEqual(error.message, 'Files should be a array')
+    }
+  })
+
+  await t.test('It should throw an error if the output isnt a string', () => {
+    try {
+      Converter.create({
+        files: ['test/OPW 733 Tienduizend redenen.ppt'],
+        output: 42
+      })
+    } catch (error) {
+      assert.strictEqual(error.message, 'Output should be a string')
+    }
+  })
+
+  await t.test(
+    'It should throw an error if the output folder doesnt exists',
+    () => {
+      try {
+        Converter.create({
+          files: ['test/OPW 733 Tienduizend redenen.ppt'],
+          output: 'unknownfolder/'
+        })
+      } catch (error) {
         assert.strictEqual(
-            converter.files[0].path,
-            'test/OPW 733 Tienduizend redenen.ppt'
-        );
-        assert.strictEqual(converter.files.length, 1);
-    });
+          error.message,
+          'Output folder doesnt exists'
+        )
+      }
+    }
+  )
 
-    await t.test('It should generate the converter', () => {
-        const converter = Converter.create({
-            files: ['test/OPW 733 Tienduizend redenen.ppt'],
-            output: 'output/',
-            options: {
-                density: 300,
-                quality: 100,
-            },
-        });
-
-        const result = converter.convert();
-
+  await t.test(
+    'It should throw an error if the output folder doesnt exists',
+    () => {
+      try {
+        Converter.create({
+          files: ['test/OPW 733 Tienduizend redenen.ppt'],
+          output: 'test/OPW 733 Tienduizend redenen.ppt'
+        })
+      } catch (error) {
         assert.strictEqual(
-            result[0].file.path,
-            'output/OPW 733 Tienduizend redenen.pdf'
-        );
-        assert.strictEqual(converter.density, 300);
-        assert.strictEqual(converter.quality, 100);
-        assert.strictEqual(
-            fileExists('output/OPW 733 Tienduizend redenen.pdf'),
-            true
-        );
-    });
-
-    await t.test('It should throw an error if the files isnt an array', () => {
-        try {
-            Converter.create({
-                files: 42,
-            });
-        } catch (error) {
-            assert.strictEqual(error.message, 'Files should be a array');
-        }
-    });
-
-    await t.test('It should throw an error if the output isnt a string', () => {
-        try {
-            Converter.create({
-                files: ['test/OPW 733 Tienduizend redenen.ppt'],
-                output: 42,
-            });
-        } catch (error) {
-            assert.strictEqual(error.message, 'Output should be a string');
-        }
-    });
-
-    await t.test(
-        'It should throw an error if the output folder doesnt exists',
-        () => {
-            try {
-                Converter.create({
-                    files: ['test/OPW 733 Tienduizend redenen.ppt'],
-                    output: 'unknownfolder/',
-                });
-            } catch (error) {
-                assert.strictEqual(
-                    error.message,
-                    'Output folder doesnt exists'
-                );
-            }
-        }
-    );
-
-    await t.test(
-        'It should throw an error if the output folder doesnt exists',
-        () => {
-            try {
-                Converter.create({
-                    files: ['test/OPW 733 Tienduizend redenen.ppt'],
-                    output: 'test/OPW 733 Tienduizend redenen.ppt',
-                });
-            } catch (error) {
-                assert.strictEqual(
-                    error.message,
-                    'Output folder doesnt exists'
-                );
-            }
-        }
-    );
-});
+          error.message,
+          'Output folder doesnt exists'
+        )
+      }
+    }
+  )
+})
