@@ -35,7 +35,7 @@
         "lint": "eslint",
         "lint:report": "eslint -f json -o report.json",
         "lint:fix": "eslint --fix",
-        "test": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info",
+        "test": "node --test src/__tests__/converter.test.js --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --production"
     },
