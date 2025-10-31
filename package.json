@@ -41,7 +41,7 @@
         "vulnerabilities": "npm audit --production"
     },
     "devDependencies": {
-        "@trojs/lint": "^0.3.1",
+        "@trojs/lint": "^0.4.0",
         "eslint": "^9.29.0",
         "esm": "^3.2.25",
         "globals": "^16.2.0",
