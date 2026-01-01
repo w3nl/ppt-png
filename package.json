@@ -44,7 +44,7 @@
         "@trojs/lint": "^0.4.0",
         "eslint": "^9.29.0",
         "esm": "^3.2.25",
-        "globals": "^16.2.0",
+        "globals": "^17.0.0",
         "jscpd": "^4.0.0"
     },
     "dependencies": {
