@@ -45,7 +45,7 @@
         "eslint": "^9.29.0",
         "esm": "^3.2.25",
         "globals": "^17.0.0",
-        "jscpd": "^4.0.0"
+        "jscpd": "^5.0.0"
     },
     "dependencies": {
         "@hckrnews/converter": "^0.6.0",
