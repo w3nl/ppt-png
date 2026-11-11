@@ -16,7 +16,7 @@ The package requires the following software to be installed:
 
 ## Installation
 
-Minimum node version: `18`
+Minimum node version: `22`
 
     `npm install ppt-png`
 
