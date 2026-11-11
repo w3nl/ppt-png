@@ -2,18 +2,26 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Only the latest major release receives security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 2.x.x   | :white_check_mark: |
-| < 2.0   | :x:                |
+| 3.x.x   | :white_check_mark: |
+| < 3.0   | :x:                |
+
+Versions up to and including 2.2.0 are vulnerable to OS command injection
+(CWE-78) via the file name, through `@hckrnews/converter`,
+`@hckrnews/pdf2png` and `@hckrnews/ppt2pdf`. Upgrade to 3.0.0 or later.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please do not report security vulnerabilities through public issues or pull
+requests.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Report them privately via GitHub:
+<https://github.com/w3nl/ppt-png/security/advisories/new>
+
+Include a description, the affected version, and steps to reproduce. You can
+expect an initial response within a week. If the report is accepted, a fix is
+prepared in a private fork and a security advisory is published together with
+the patched release. If it is declined, you will receive an explanation.
