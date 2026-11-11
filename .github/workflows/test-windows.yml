@@ -1,0 +1,34 @@
+name: Node Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x, 23.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Update APT
+      run: sudo apt update
+    - name: Install LibreOffice
+      run: sudo apt install libreoffice
+    - name: Install imagemagick
+      run: sudo apt install imagemagick ghostscript
+    - name: Change ImageMagick policy to allow pdf->png conversion.
+      run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
+    - name: npm test
+      run: |
+        npm ci
+        npm test
+      env:
+        CI: true
