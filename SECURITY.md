@@ -2,16 +2,16 @@
 
 ## Supported Versions
 
-Only the latest major release receives security updates.
+Only the latest release receives security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 3.x.x   | :white_check_mark: |
-| < 3.0   | :x:                |
+| 2.2.x   | :white_check_mark: |
+| < 2.2   | :x:                |
 
 Versions up to and including 2.2.0 are vulnerable to OS command injection
 (CWE-78) via the file name, through `@hckrnews/converter`,
-`@hckrnews/pdf2png` and `@hckrnews/ppt2pdf`. Upgrade to 3.0.0 or later.
+`@hckrnews/pdf2png` and `@hckrnews/ppt2pdf`. Upgrade to 2.2.1 or later.
 
 ## Reporting a Vulnerability
 
