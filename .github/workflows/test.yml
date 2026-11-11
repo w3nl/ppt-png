@@ -25,7 +25,7 @@ jobs:
     - name: Install imagemagick
       run: sudo apt install imagemagick ghostscript
     - name: Change ImageMagick policy to allow pdf->png conversion.
-      run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
+      run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-*/policy.xml
     - name: npm test
       run: |
         npm ci

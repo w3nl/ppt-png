@@ -18,14 +18,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Update APT
-      run: sudo apt update
-    - name: Install LibreOffice
-      run: sudo apt install libreoffice
-    - name: Install imagemagick
-      run: sudo apt install imagemagick ghostscript
-    - name: Change ImageMagick policy to allow pdf->png conversion.
-      run: sudo sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
+    - name: Install LibreOffice, ImageMagick and Ghostscript
+      run: choco install libreoffice-fresh imagemagick ghostscript -y --no-progress
+    - name: Add LibreOffice to PATH
+      run: echo "C:\Program Files\LibreOffice\program" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
     - name: npm test
       run: |
         npm ci
